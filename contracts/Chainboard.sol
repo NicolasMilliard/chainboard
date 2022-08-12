@@ -114,13 +114,14 @@ contract Chainboard {
     }
 
     // Get renter informations
-    function getRenter(address walletAddress) public isRenter(walletAddress) view returns(bool canRent, bool isRenting) {
+    function getRenterStatus(address walletAddress) public isRenter(walletAddress) view returns(bool canRent, bool isRenting) {
         canRent = renters[walletAddress].canRent;
         isRenting = renters[walletAddress].isRenting;
     }
 
     // Check if renter exist
     function renterExists(address walletAddress) public isRenter(walletAddress) view returns(bool) {
+        // address(0) is the default value for an address
         if(renters[walletAddress].walletAddress != address(0)) {
             return true;
         }
@@ -132,6 +133,11 @@ contract Chainboard {
         uint timespanMinutes = getTotalDuration(walletAddress);
         // snowboardPrice must be in wei format (16 decimals), e.g. 0.012 BNB = 12000000000000000 wei
         renters[walletAddress].due = timespanMinutes * snowboardPrice;
+    }
+
+    // Get due amount
+    function getDue(address walletAddress) public view returns(uint) {
+        return renters[walletAddress].due;
     }
 
     // Return a bool to check is renter can rent
