@@ -8,6 +8,7 @@ const BlockchainContext = createContext();
 
 export const BlockchainProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
+    const [balance, setBalance] = useState();
 
     // Read-only access to the blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -54,9 +55,20 @@ export const BlockchainProvider = ({ children }) => {
         }
     }
 
+    // Get contract's balance
+    const getContractBalance = async () => {
+        try {
+            const contractBalance = await contract.balanceOf();
+            setBalance(ethers.utils.formatEther(contractBalance));
+        } catch (error) {
+            console.log(error);            
+        }
+    }
+
     // When variables changes
     useEffect(() => {
         checkWalletConnection();
+        getContractBalance();
     }, [])
 
   return (
