@@ -83,4 +83,4 @@ export const BlockchainProvider = ({ children }) => {
   )
 }
 
-export const useStateContext = () => useContext(BlockchainContext);
+export const useStateBlockchainContext = () => useContext(BlockchainContext);
