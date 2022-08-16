@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { useStateContext } from '../contexts/BlockchainContext'
+import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 const ConnectWalletButton = () => {
-  const { connectWallet, currentAccount } = useStateContext();
+  const { connectWallet, currentAccount } = useStateBlockchainContext();
 
   return (
     <button
