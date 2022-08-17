@@ -14,20 +14,47 @@
 }
 
 /* Hero */
+@keyframes fadeInToTop {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#hero-text-container {
+    position: relative;
+    z-index: 2;
+}
+
+.chainboard-hero-bg {
+    position: relative;
+}
+
+.chainboard-hero-bg::before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    animation: fadeInToTop 1s ease-in-out;
+}
+
 @media screen and (min-width: 600px) {
-    .chainboard-hero-bg {
-        background-image: url('./img/hero/chainboard-rediscover-world-400px.jpg');
+    .chainboard-hero-bg::before {
+        background-image: url('./img/hero/chainboard-rediscover-world-400px.jpg');        
     }    
 }
 
 @media screen and (min-width: 768px) {
-    .chainboard-hero-bg {
+    .chainboard-hero-bg::before {
         background-image: url('./img/hero/chainboard-rediscover-world-800px.jpg');
     }    
 }
 
 @media screen and (min-width: 1110px) {
-    .chainboard-hero-bg {
+    .chainboard-hero-bg::before {
         background-image: url('./img/hero/chainboard-rediscover-world.jpg');
     }    
 }
@@ -43,7 +70,7 @@
 }
 
 /* Level Select */
-.chainboard-icon-button:hover, .chainboard-icon-button:hover .chainboard-icon-flash {
+.chainboard-icon-flash-button:hover, .chainboard-icon-flash-button:hover .chainboard-icon-flash, .chainboard-icon-flash-button-active, .chainboard-icon-flash-button-active .chainboard-icon-flash {
     color: #f2504b;
     fill: #f2504b;
 }
