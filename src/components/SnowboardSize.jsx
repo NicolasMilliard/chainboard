@@ -5,8 +5,15 @@ import { useStateContext } from '../contexts/ContextProvider';
 const SnowboardSize = () => {
   const { size, handleSnowboardSize } = useStateContext();
 
+  // Manage background color's track of the input range
   const handleInputChange = (e) => {
+    let target = e.target;
     
+    const min = target.min;
+    const max = target.max;
+
+    // size is taken from the state
+    target.style.backgroundSize = (size - min) * 100 / (max - min) + '% 100%';
   }
   
   return (
@@ -17,6 +24,7 @@ const SnowboardSize = () => {
           <input id='snowboard-size' type='range' min='142' max='167' className='chainboard-input-range' onChange={handleSnowboardSize} onInput={handleInputChange} />
           <span id='snowboard-size-choice' className='ml-2'>{size} cm</span>            
         </div>
+        <button>Calculate my size's snowboard</button>
     </div>
   )
 }
