@@ -2,17 +2,20 @@ import React from 'react'
 
 import LevelSelect from '../components/LevelSelect'
 import SnowboardSize from '../components/SnowboardSize'
-import ProductSlider from '../components/ProductSlider'
+import ProductCarousel from '../components/ProductCarousel'
+import BnbPrice from '../components/BnbPrice'
+
 
 const Rent = () => {
   return (
-    <div className='flex flex-wrap h-full max-w-7xl mx-auto mt-20 sm:mt-40 px-8'>
-        <div className='flex flex-col justify-between'>
+    <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 sm:mt-40'>
+        <div className='flex flex-col flex-grow flex-shrink basis-0'>
             <LevelSelect />
             <SnowboardSize />
+            <BnbPrice />
         </div>
-        <div>
-          <ProductSlider />
+        <div className='flex flex-grow flex-shrink basis-0'>
+          <ProductCarousel />
         </div>
     </div>
   )
