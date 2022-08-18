@@ -17,7 +17,7 @@ const SnowboardSize = () => {
   }
   
   return (
-    <div>
+    <div className='mb-20'>
         <h2 className='font-semibold text-xl sm:text-2xl sm:leading-tight mb-8'>Choose your snowboard size:</h2>
         <div className='flex flex-wrap'>
           <label htmlFor='snowboard-size' className='mr-2'>Size:</label>
