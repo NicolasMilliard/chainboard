@@ -7,44 +7,50 @@ import expertBack from '../img/products/snowboard-expert-back.png'
 
 export const snowboards = [
     {
-        level: 'Beginner',
+        level: 'beginner',
         images: [
             {
+                id: 1,
                 src: beginnerFront,
                 alt: 'Beginner Snowboard - Front'
             },
-            {
-                src: beginnerBack,
-                alt: 'Beginner Snowboard - Back'
-            }
+            // {
+            //     id: 2,
+            //     src: beginnerBack,
+            //     alt: 'Beginner Snowboard - Back'
+            // }
         ],
         price: 0.012
     },
     {
-        level: 'Intermediate',
+        level: 'intermediate',
         images: [
             {
+                id: 3,
                 src: intermediateFront,
                 alt: 'Intermediate Snowboard - Front'
             },
-            {
-                src: intermediateBack,
-                alt: 'Intermediate Snowboard - Back'
-            }
+            // {
+            //     id: 4,
+            //     src: intermediateBack,
+            //     alt: 'Intermediate Snowboard - Back'
+            // }
         ],
         price: 0.014
     },
     {
-        level: 'Expert',
+        level: 'expert',
         images: [
             {
+                id: 5,
                 src: expertFront,
                 alt: 'Expert Snowboard - Front'
             },
-            {
-                src: expertBack,
-                alt: 'Expert Snowboard - Back'
-            }
+            // {
+            //     id: 6,
+            //     src: expertBack,
+            //     alt: 'Expert Snowboard - Back'
+            // }
         ],
         price: 0.019
     }
