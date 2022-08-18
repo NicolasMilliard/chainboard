@@ -69,6 +69,19 @@
     height: auto;
 }
 
+.chainboard-bsc-logo-price {
+    width: 45px;
+    height: auto;
+}
+
+.chainboard-bsc-separator {
+    position: relative;
+    width: 2px;
+    height: 53px;
+    border-radius: 2px;
+    background-color: #d9d9d9;
+}
+
 /* Level Select */
 .chainboard-icon-flash-button:hover, .chainboard-icon-flash-button:hover .chainboard-icon-flash, .chainboard-icon-flash-button-active, .chainboard-icon-flash-button-active .chainboard-icon-flash {
     color: #f2504b;
@@ -154,3 +167,33 @@ input[type="range"]::-ms-thumb {
     border: none;
     background: transparent;
   }
+
+/* Product Carousel */
+.carousel-container, .carousel-wrapper, .carousel-container-wrapper {
+    width: 100%;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+.carousel-container-wrapper {
+    overflow: hidden;
+    height: 100%;
+}
+
+.carousel-content {
+    transition: all 0.25s linear;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.carousel-content::-webkit-scrollbar, .carousel-content::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-content > * {
+    width: 100%;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
