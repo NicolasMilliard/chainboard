@@ -1,25 +1,31 @@
 import React from 'react'
-import Flash from './Flash'
+
+import { useStateContext } from '../contexts/ContextProvider';
+
+import { levels } from '../data/levels';
 
 const LevelSelect = () => {
+  const { handleLevel, level } = useStateContext(); 
+
+  const active = 'flex items-center capitalize chainboard-icon-flash-button-active';
+  const normal = 'flex items-center capitalize chainboard-icon-flash-button';
+
   return (
     <div className='mb-20'>
         <h2 className='font-semibold text-xl sm:text-2xl sm:leading-tight mb-8'>Select your level:</h2>
-        {/* Beginner */}
-        <button type='button' className='chainboard-icon-flash-button-active flex items-center' onClick={() => {}}>
-            <Flash />
-            <span className='ml-2'>Beginner</span>
-        </button>
-        {/* Intermediate */}
-        <button type='button' className='chainboard-icon-flash-button flex items-center' onClick={() => {}}>
-            <Flash /><Flash />
-            <span className='ml-2'>Intermediate</span>
-        </button>
-        {/* Expert */}
-        <button type='button' className='chainboard-icon-flash-button flex items-center' onClick={() => {}}>
-            <Flash /><Flash /><Flash />
-            <span className='ml-2'>Expert</span>
-        </button>
+        {levels.map((item) => (
+          <button
+            key={item.level}
+            id={item.level}
+            type='submit'
+            className={normal}
+            onClick={() => handleLevel(item.level)}
+          >
+            {item.icon}
+            <span className='ml-2'>{item.level}</span>
+          </button>
+        ))}
+        
     </div>
   )
 }
