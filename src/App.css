@@ -197,3 +197,8 @@ input[type="range"]::-ms-thumb {
     flex-shrink: 0;
     flex-grow: 1;
 }
+
+/* Button */
+.chainboard-default-btn {
+    max-width: 220px;
+}
