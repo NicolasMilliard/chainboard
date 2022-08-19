@@ -8,7 +8,7 @@ import { useStateBlockchainContext } from './contexts/BlockchainContext'
 import './App.css'
 
 const App = () => {
-    const { connectWallet, currentAccount } = useStateBlockchainContext();
+    const { currentAccount } = useStateBlockchainContext();
   return (
     <>
         <Navbar />
