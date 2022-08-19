@@ -21,7 +21,7 @@ const ProductCarousel = () => {
                         key={snowboard.id}
                         src={snowboard.src}
                         alt={snowboard.alt}
-                        style={{ height: (size * 4.40) + 'px'}}
+                        style={{ transform: 'scale(' + (size / 167) + ')'}}
                         className='mx-auto'
                       />
                     ))}
