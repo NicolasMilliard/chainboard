@@ -7,7 +7,7 @@ import { useStateContext } from '../contexts/ContextProvider'
 const BnbPrice = () => {
     const { level } = useStateContext();
   return (
-    <div className='flex flex-wrap'>
+    <div className='flex flex-wrap mb-20'>
         <div className='flex flex-wrap items-center'>
             <img src={bsc} alt='Binance Smart Chain' className='chainboard-bsc-logo-price mr-4' />
             <div className='chainboard-bsc-separator'></div>
