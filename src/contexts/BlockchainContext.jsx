@@ -102,7 +102,8 @@ export const BlockchainProvider = ({ children }) => {
                 const renter = await contract.getRenterStatus(currentAccount);
                 // Save canRent and isRenting values in the state
                 setRenter(renter);
-                console.log('[getRenterStatus]renter: ' + renter);
+                console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
+                console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
             }
         } catch (error) {
             console.log(error);
@@ -143,11 +144,10 @@ export const BlockchainProvider = ({ children }) => {
     const getDue = async() => {
         try {
             if(currentAccount) {
-                // TO DO: add price as a state to send the price of the selected snowboard
                 const due = await contract.getDue(currentAccount);
                 // Store the due in the state
                 setDue(ethers.utils.formatEther(due));
-                console.log('[getDue]due: ' + due);                
+                console.log('[getDue]due: ' + due);
             }            
         } catch (error) {
             console.log(error);
@@ -215,15 +215,14 @@ export const BlockchainProvider = ({ children }) => {
     }
 
     // Call checkin function
-    const checkIn = async() => {
+    const checkIn = async(weiPrice) => {
         try {
-            const checkIn = await contract.checkIn(currentAccount);
+            const checkIn = await contract.checkIn(currentAccount, weiPrice);
             await checkIn.wait();
 
             // Update renter's status, due actual duration and total duration
             await getRenterStatus();
             await getDue();
-            await getActualDuration();
             await getTotalDuration();
         } catch (error) {
             console.log(error);
@@ -304,7 +303,8 @@ export const BlockchainProvider = ({ children }) => {
             renterExists,
             addRenter,
             renter,
-            checkOut
+            checkOut,
+            checkIn
         }}
     >
         { children }
