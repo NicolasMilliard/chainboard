@@ -129,10 +129,13 @@ export const BlockchainProvider = ({ children }) => {
         try {
             if(currentAccount) {
                 const bnbValue = ethers.utils.parseEther(value);
+
+                console.log('[deposit] due: ' + value);
+                console.log('[deposit] bnbValue: ' + value);
                 // Specify the value of the message
                 const deposit = await contract.deposit(currentAccount, { value: bnbValue });
                 await deposit.wait();
-                console.log('[deposit]deposit: ' + deposit);
+                console.log('[deposit]deposit.currentAccount: ' + deposit.currentAccount + 'deposit.value: ' + deposit.value);
                 await getRenterBalance();
             }
         } catch (error) {
@@ -183,12 +186,15 @@ export const BlockchainProvider = ({ children }) => {
     }
 
     // Make the payment
-    const makePayment = async(value) => {
+    const makePayment = async() => {
         try {
-            if(currentAccount){
-                const bnbValue = ethers.utils.parseEther(value);
+            if(currentAccount) {
+                const bnbValue = ethers.utils.parseEther(due);
                 const deposit = await contract.makePayment(currentAccount, bnbValue);
                 await deposit.wait();
+
+                console.log('[makePayment] due: ' + due);
+                console.log('[makePayment] bnbValue: ' + due);
 
                 // Check if canRent, isRenting, balance, totalDuration and due are correctly reset and store the results in appropriate states
                 await getRenterStatus();
@@ -304,7 +310,11 @@ export const BlockchainProvider = ({ children }) => {
             addRenter,
             renter,
             checkOut,
-            checkIn
+            checkIn,
+            getDue,
+            due,
+            deposit,
+            makePayment
         }}
     >
         { children }

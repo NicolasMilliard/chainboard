@@ -12,7 +12,7 @@ import { useStateContext } from '../contexts/ContextProvider'
 import { snowboards } from '../data/snowboards'
 
 const Rent = () => {
-  const { currentAccount, checkOut, checkIn, addRenter, renterExists } = useStateBlockchainContext();
+  const { currentAccount, checkOut, checkIn, addRenter, renterExists, due, deposit, makePayment } = useStateBlockchainContext();
   const { level } = useStateContext();
 
   const handleSubmit = async() => {
@@ -41,6 +41,9 @@ const Rent = () => {
             {/* If the user is a renter, he can checkout. If he's not, he must create his profile before renting his snowboard */}
             {renterExists ? <Button text='Check out' customFunc={checkOut} /> : <Button text='Create my profile' customFunc={handleSubmit} />}
             <Button text='Check in' customFunc={handleCheckIn} />
+            <Button text='Deposit' customFunc={() => deposit('0.2')} />
+            {/* If due greater than 0 */}
+            {due > 0 ? <Button text='Make Payment' customFunc={makePayment} /> : ''}
         </div>
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />
