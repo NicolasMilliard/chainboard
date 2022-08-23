@@ -1,5 +1,6 @@
 import React from 'react'
 import bsc from '../img/logo/bsc-short.svg'
+
 import { snowboards } from '../data/snowboards'
 
 import { useStateContext } from '../contexts/ContextProvider'
