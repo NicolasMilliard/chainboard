@@ -9,6 +9,7 @@ const BlockchainContext = createContext();
 export const BlockchainProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
     const [renter, setRenter] = useState();
+    // const [renterIsRenting, setRenterIsRenting] = useState();
     const [renterExists, setRenterExists] = useState();
     const [due, setDue] = useState();
     const [actualDuration, setActualDuration] = useState();
@@ -102,8 +103,10 @@ export const BlockchainProvider = ({ children }) => {
                 const renter = await contract.getRenterStatus(currentAccount);
                 // Save canRent and isRenting values in the state
                 setRenter(renter);
+                // setRenterIsRenting(renter.isRenting);
                 console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
                 console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
+                // console.log('[getRenterStatus]isRenting: ' + renterIsRenting);
             }
         } catch (error) {
             console.log(error);
@@ -135,7 +138,7 @@ export const BlockchainProvider = ({ children }) => {
                 // Specify the value of the message
                 const deposit = await contract.deposit(currentAccount, { value: bnbValue });
                 await deposit.wait();
-                console.log('[deposit]deposit.currentAccount: ' + deposit.currentAccount + 'deposit.value: ' + deposit.value);
+                console.log('[deposit]deposit.currentAccount: ' + currentAccount + 'deposit.value: ' + deposit.value);
                 await getRenterBalance();
             }
         } catch (error) {
@@ -212,7 +215,7 @@ export const BlockchainProvider = ({ children }) => {
         try {
             const checkOut = await contract.checkOut(currentAccount);
             await checkOut.wait();
-
+            
             // Update renter's status
             await getRenterStatus();
         } catch (error) {
@@ -309,12 +312,18 @@ export const BlockchainProvider = ({ children }) => {
             renterExists,
             addRenter,
             renter,
+            // renterIsRenting,
             checkOut,
+            getRenterStatus,
             checkIn,
             getDue,
             due,
             deposit,
-            makePayment
+            makePayment,
+            owner,
+            getOwnerBalance,
+            ownerWithdraw,
+            getContractBalance
         }}
     >
         { children }
