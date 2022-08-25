@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import LevelSelect from '../components/LevelSelect'
@@ -13,19 +13,20 @@ const Rent = () => {
   const { currentAccount, checkOut, renter, addRenter, renterExists } = useStateBlockchainContext();
   let navigate = useNavigate();
 
+  useEffect(() => {
+    // if renting is true, redirect to the renting page
+    if(renter) {
+      if(renter.isRenting) {
+        navigate('/renting');
+      } else {
+        console.log('renter.isRenting: ' + renter.isRenting);
+      }
+    }
+  })
+
   const handleSubmit = async() => {
     await addRenter(currentAccount, true, false, 0, 0, 0, 0);
     console.log('[handleSubmit]: renter added');
-  }
-
-  const handleCheckOut = async() => {
-    checkOut();
-    
-    if(renter.isRenting) {
-      navigate('/renting');
-    } else {
-      console.log(renter.isRenting);
-    }
   }
 
   return (
@@ -34,7 +35,7 @@ const Rent = () => {
             <LevelSelect />
             <SnowboardSize />
             <BnbPrice />
-            {renterExists ? <Button text='Check out' customFunc={handleCheckOut} /> : <Button text='Create my profile' customFunc={handleSubmit} />}
+            {renterExists ? <Button text='Check out' customFunc={checkOut} /> : <Button text='Create my profile' customFunc={handleSubmit} />}
         </div>
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />
