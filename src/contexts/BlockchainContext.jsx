@@ -9,7 +9,6 @@ const BlockchainContext = createContext();
 export const BlockchainProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
     const [renter, setRenter] = useState();
-    // const [renterIsRenting, setRenterIsRenting] = useState();
     const [renterExists, setRenterExists] = useState();
     const [due, setDue] = useState();
     const [actualDuration, setActualDuration] = useState();
@@ -103,10 +102,8 @@ export const BlockchainProvider = ({ children }) => {
                 const renter = await contract.getRenterStatus(currentAccount);
                 // Save canRent and isRenting values in the state
                 setRenter(renter);
-                // setRenterIsRenting(renter.isRenting);
                 console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
                 console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
-                // console.log('[getRenterStatus]isRenting: ' + renterIsRenting);
             }
         } catch (error) {
             console.log(error);
@@ -163,7 +160,7 @@ export const BlockchainProvider = ({ children }) => {
     // Get the actual duration
     const getActualDuration = async() => {
         try {
-            if(currentAccount){
+            if(currentAccount) {
                 const actualDuration = await contract.getActualDuration(currentAccount);
                 // Store the actualDuration in the state and make it a number
                 setActualDuration(Number(actualDuration));
@@ -295,14 +292,14 @@ export const BlockchainProvider = ({ children }) => {
     useEffect(() => {
         checkWalletConnection();
         checkRenterExists();
-        getRenterBalance();
+        // getRenterBalance();
         getDue();
         // getActualDuration();
-        getTotalDuration();
+        // getTotalDuration();
         isOwner();
-        getContractBalance();
-        getOwnerBalance();
-    }, [currentAccount])
+        // getContractBalance();
+        // getOwnerBalance();
+    }, [currentAccount, owner])
 
   return (
     <BlockchainContext.Provider
@@ -312,7 +309,6 @@ export const BlockchainProvider = ({ children }) => {
             renterExists,
             addRenter,
             renter,
-            // renterIsRenting,
             checkOut,
             getRenterStatus,
             checkIn,
@@ -323,7 +319,8 @@ export const BlockchainProvider = ({ children }) => {
             owner,
             getOwnerBalance,
             ownerWithdraw,
-            getContractBalance
+            getContractBalance,
+            actualDuration
         }}
     >
         { children }
