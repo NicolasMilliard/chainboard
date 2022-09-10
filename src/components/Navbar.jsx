@@ -16,10 +16,12 @@ const Navbar = () => {
             <h2 className='text-2xl sm:text-3xl  font-extrabold'>Chainboard</h2>
             <span className='chainboard-dot ml-1'></span>
         </Link>
-        {/* If user is the owner of the contract */}
-        {owner && <Link to='/admin'>Admin</Link>}
       </div>
-        <ConnectWalletButton />        
+      <div>
+        {/* If user is the owner of the contract */}
+        {owner && <Link to='/admin' className='mr-6 font-semibold hover:text-[#f2504b]'>Dashboard</Link>}
+        <ConnectWalletButton />
+      </div>      
     </div>
   )
 }
