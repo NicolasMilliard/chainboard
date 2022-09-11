@@ -30,8 +30,8 @@ const Rent = () => {
   }
 
   return (
-    <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
-        <div className='flex flex-col flex-grow flex-shrink basis-0'>
+    <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8'>
+        <div className='flex flex-col flex-grow flex-shrink basis-0 justify-center'>
             <LevelSelect />
             <SnowboardSize />
             <BnbPrice />
