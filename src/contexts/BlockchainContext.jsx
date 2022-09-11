@@ -58,6 +58,11 @@ export const BlockchainProvider = ({ children }) => {
             } else {
                 console.log("No accounts found");
             }
+
+            // Is account changed?
+            window.ethereum.on('accountsChanged', () => {
+                window.location.reload();
+            })
         } catch (error) {
             console.log(error);
         }
