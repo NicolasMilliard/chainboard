@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useStateContext } from '../contexts/ContextProvider';
 
 import { levels } from '../data/levels';
 
 const LevelSelect = () => {
-  const { handleLevel, level } = useStateContext(); 
+  const { handleLevel, level } = useStateContext();
+  const [selectedLevel, setSelectedLevel] = useState('beginner');
 
-  const active = 'flex items-center capitalize chainboard-icon-flash-button-active';
+  const active = 'flex items-center capitalize chainboard-icon-flash-button-active font-semibold';
   const normal = 'flex items-center capitalize chainboard-icon-flash-button';
+
+  useEffect(() => {
+    setSelectedLevel(() => level);   
+  })
 
   return (
     <div className='mb-20'>
@@ -18,7 +23,7 @@ const LevelSelect = () => {
             key={item.level}
             id={item.level}
             type='submit'
-            className={normal}
+            className={selectedLevel == item.level ? active : normal}
             onClick={() => handleLevel(item.level)}
           >
             {item.icon}
