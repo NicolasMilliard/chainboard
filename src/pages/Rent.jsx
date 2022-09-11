@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import LevelSelect from '../components/LevelSelect'
 import SnowboardSize from '../components/SnowboardSize'
+import SnowboardSizeCalculation from '../components/SnowboardSizeCalculation'
 import ProductCarousel from '../components/ProductCarousel'
 import BnbPrice from '../components/BnbPrice'
 import Button from '../components/Button'
@@ -30,7 +31,9 @@ const Rent = () => {
   }
 
   return (
-    <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8'>
+    <>
+      <SnowboardSizeCalculation />
+      <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8'>
         <div className='flex flex-col flex-grow flex-shrink basis-0 justify-center'>
             <LevelSelect />
             <SnowboardSize />
@@ -40,7 +43,8 @@ const Rent = () => {
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />
         </div>
-    </div>
+    </div>    
+    </>
   )
 }
 
