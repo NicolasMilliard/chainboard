@@ -62,11 +62,46 @@ export const BlockchainProvider = ({ children }) => {
             // Is account changed?
             window.ethereum.on('accountsChanged', () => {
                 window.location.reload();
-            })
+            });
         } catch (error) {
             console.log(error);
         }
     }
+
+    // Is current chain matches the BSC Testnet chain?
+    const checkNetwork = async() => {
+        try {
+            if(window.ethereum) {
+                // Targets BSC Tesnet chain (id: 0x61)
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x61' }],
+                });
+            }
+        } catch (switchError) {
+            // If the chain is not already present on Metamask
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [
+                        {
+                            chainId: '0x61',
+                            chainName: 'Binance Smart Chain Testnet',
+                            nativeCurrency: {
+                                name: 'Binance Chain Native Token',
+                                symbol: 'tBNB',
+                                decimals: 18
+                            },
+                            rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545', 'https://data-seed-prebsc-2-s1.binance.org:8545', 'https://data-seed-prebsc-1-s2.binance.org:8545', 'https://data-seed-prebsc-2-s2.binance.org:8545', 'https://data-seed-prebsc-1-s3.binance.org:8545', 'https://data-seed-prebsc-2-s3.binance.org:8545'],
+                            blockExplorerUrls: ['https://testnet.bscscan.com']
+                        },
+                    ],
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
 
     // Add the user as a renter
     const addRenter = async(currentAccount, canRent, isRenting, balance, due, start, end) => {
@@ -295,6 +330,7 @@ export const BlockchainProvider = ({ children }) => {
 
     // When variables changes
     useEffect(() => {
+        checkNetwork();
         checkWalletConnection();
         checkRenterExists();
         // getRenterBalance();
