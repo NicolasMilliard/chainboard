@@ -5,6 +5,7 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
     const [size, setSize] = useState('142');
     const [level, setLevel] = useState('beginner');
+    const [isDisplay, setIsDisplay] = useState(false);
 
     const handleLevel = (selectedLevel) => {
         setLevel(selectedLevel);
@@ -17,8 +18,9 @@ export const ContextProvider = ({ children }) => {
     return (
         <StateContext.Provider
             value={{
-                size, handleSnowboardSize,
-                level, handleLevel
+                size, setSize, handleSnowboardSize,
+                level, handleLevel,
+                isDisplay, setIsDisplay
             }}    
         >
             {children}
