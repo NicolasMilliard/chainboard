@@ -19,8 +19,6 @@ const Rent = () => {
     if(renter) {
       if(renter.isRenting) {
         navigate('/renting');
-      } else {
-        console.log('renter.isRenting: ' + renter.isRenting);
       }
     }
   })
