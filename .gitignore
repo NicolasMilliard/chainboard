@@ -24,4 +24,5 @@ yarn-error.log*
 
 # smart contracts
 /artifacts/build-info/*
+/cache/*
 .env
