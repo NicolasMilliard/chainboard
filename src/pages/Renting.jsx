@@ -17,9 +17,9 @@ const Renting = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-      // if renting is false, redirect to the home/rent page
+      // if renting is false and due equal to 0, redirect to the home/rent page
       if(renter) {
-        if(renter.isRenting === false) {
+        if(renter.isRenting === false && due === 0) {
           navigate('/');
         }
       }
@@ -40,13 +40,15 @@ const Renting = () => {
   return (
     <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
         <div className='flex flex-col flex-grow flex-shrink basis-0'>
-          <ActualDuration />
-          <RentingPrice />
+          {/* If the user has a pending due, he can't rent a snowboard so ActualDuration must be hidden */}
+          {<ActualDuration />}
+           {/* If the user has a pending due, he can't rent a snowboard so RentingPrice must be hidden */}
+          {<RentingPrice />}
           {/* If the user is currently renting a snowboard */}
-          { renter && renter.isRenting && <Button text='Check in' customFunc={handleCheckIn} />}
-          <Button text='Deposit' customFunc={() => deposit('0.02')} />
+          {renter && renter.isRenting && <Button text='Check in' customFunc={handleCheckIn} />}
+          {/* <Button text='Deposit' customFunc={() => deposit('0.02')} /> */}
           {/* If due greater than 0 */}
-          {due > 0 && <Button text='Make Payment' customFunc={makePayment} />}
+          {due > 0 && <button onClick={makePayment} className='chainboard-default-btn bg-[#f2504b] mb-6 px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'>Pay {due} BNB</button>}
         </div>
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />
