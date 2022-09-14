@@ -24,7 +24,7 @@ const RentingPrice = () => {
                         return (
                             <p key={item.level}>
                                 <span className='text-[#f2504b] font-semibold'>{actualPrice} BNB</span><br />
-                                <span><abbr title='Duration is calculate in minutes to facilitate tests.'>{actualDuration} hours of renting*</abbr></span>
+                                <span><abbr title='Duration is calculate in minutes to facilitate tests.'>{actualDuration} {actualDuration == 1 ? 'hour' : 'hours'} of renting*</abbr></span>
                             </p>
                         )
                     }
