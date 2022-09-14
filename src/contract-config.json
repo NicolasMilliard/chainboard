@@ -1,348 +1,249 @@
 {
     "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address payable",
-              "name": "walletAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "bool",
-              "name": "canRent",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "isRenting",
-              "type": "bool"
-            },
-            {
-              "internalType": "uint256",
-              "name": "balance",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "due",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "start",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "end",
-              "type": "uint256"
-            }
-          ],
-          "name": "addRenter",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "balanceOf",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "balanceOfOwner",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "balanceOfRenter",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "canRentSnowboard",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "snowboardPrice",
-              "type": "uint256"
-            }
-          ],
-          "name": "checkIn",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "checkOut",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "deposit",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "getActualDuration",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "getDue",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "getRenterStatus",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "canRent",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "isRenting",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "getTotalDuration",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "isOwner",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "makePayment",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "walletAddress",
-              "type": "address"
-            }
-          ],
-          "name": "renterExists",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "name": "renters",
-          "outputs": [
-            {
-              "internalType": "address payable",
-              "name": "walletAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "bool",
-              "name": "canRent",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "isRenting",
-              "type": "bool"
-            },
-            {
-              "internalType": "uint256",
-              "name": "balance",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "due",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "start",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "end",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "withdrawOwnerBalance",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        }
+      {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "canRent",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRenting",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "due",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "start",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "end",
+            "type": "uint256"
+          }
+        ],
+        "name": "addRenter",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "snowboardPrice",
+            "type": "uint256"
+          }
+        ],
+        "name": "checkIn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "checkOut",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "getActualDuration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "getDue",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "getRenterStatus",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "canRent",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRenting",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "getTotalDuration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "isOwner",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "makePayment",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "renterExists",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "renters",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "canRent",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRenting",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "due",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "start",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "end",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
     ],
-    "contractAddress": "0x53b8debB620daE58eC3547B85256A9ea789C092C"
+    "contractAddress": "0x0Ff8f2EfCaeDfea2b444ca6f0b2588Bfa3CE7f35"
 }
