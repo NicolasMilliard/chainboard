@@ -14,9 +14,6 @@ export const BlockchainProvider = ({ children }) => {
     const [actualDuration, setActualDuration] = useState();
     const [totalDuration, setTotalDuration] = useState();
     const [owner, setOwner] = useState(false);
-    const [renterBalance, setRenterBalance] = useState();
-    const [contractBalance, setContractBalance] = useState();
-    const [ownerBalance, setOwnerBalance] = useState();
 
     // Read-only access to the blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -104,10 +101,10 @@ export const BlockchainProvider = ({ children }) => {
     };
 
     // Add the user as a renter
-    const addRenter = async(currentAccount, canRent, isRenting, balance, due, start, end) => {
+    const addRenter = async(currentAccount, canRent, isRenting, due, start, end) => {
         try {
-            console.log(`[addRenter]currentAccount: ${currentAccount} - ${canRent} - ${isRenting} - ${balance} - ${due} - ${start} - ${end}`);
-            const addRenter = await contract.addRenter(currentAccount, canRent, isRenting, balance, due, start, end);
+            console.log(`[addRenter]currentAccount: ${currentAccount} - ${canRent} - ${isRenting} - ${due} - ${start} - ${end}`);
+            const addRenter = await contract.addRenter(currentAccount, canRent, isRenting, due, start, end);
             await addRenter.wait();
             checkRenterExists();
         } catch (error) {
@@ -144,39 +141,6 @@ export const BlockchainProvider = ({ children }) => {
                 setRenter(renter);
                 console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
                 console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // Get renter's balance
-    const getRenterBalance = async() => {
-        try {
-            if(currentAccount) {
-                const renterBalance = await contract.balanceOfRenter(currentAccount);
-                // Store the balance in the state
-                setRenterBalance(ethers.utils.formatEther(renterBalance))
-                console.log('[getRenterBalance]renterBalance: ' + renterBalance);
-            }            
-        } catch (error) {
-            console.log(error);            
-        }
-    }
-
-    // Deposit BNB into the smart contract
-    const deposit = async(value) => {
-        try {
-            if(currentAccount) {
-                const bnbValue = ethers.utils.parseEther(value);
-
-                console.log('[deposit] due: ' + value);
-                console.log('[deposit] bnbValue: ' + value);
-                // Specify the value of the message
-                const deposit = await contract.deposit(currentAccount, { value: bnbValue });
-                await deposit.wait();
-                console.log('[deposit]deposit.currentAccount: ' + currentAccount + 'deposit.value: ' + deposit.value);
-                await getRenterBalance();
             }
         } catch (error) {
             console.log(error);
@@ -229,16 +193,16 @@ export const BlockchainProvider = ({ children }) => {
     const makePayment = async() => {
         try {
             if(currentAccount) {
-                const bnbValue = ethers.utils.parseEther(due);
-                const deposit = await contract.makePayment(currentAccount, bnbValue);
+                // const bnbValue = ethers.utils.parseEther(due);
+                const weiDue = (due * (10 ** 18)).toString();
+                const deposit = await contract.makePayment(currentAccount, { value: weiDue });
                 await deposit.wait();
 
-                console.log('[makePayment] due: ' + due);
-                console.log('[makePayment] bnbValue: ' + due);
+                console.log('[makePayment] weiDue: ' + weiDue);
+                // console.log('[makePayment] ethers.utils.parseEther(due): ' + ethers.utils.parseEther(due));
 
-                // Check if canRent, isRenting, balance, totalDuration and due are correctly reset and store the results in appropriate states
+                // Check if canRent, isRenting, totalDuration and due are correctly reset and store the results in appropriate states
                 await getRenterStatus();
-                await getRenterBalance();
                 await getTotalDuration();
                 await getDue();
             }
@@ -247,7 +211,7 @@ export const BlockchainProvider = ({ children }) => {
         }
     }
 
-    // Call checkout function
+    // Call checkOut function
     const checkOut = async() => {
         try {
             const checkOut = await contract.checkOut(currentAccount);
@@ -260,7 +224,7 @@ export const BlockchainProvider = ({ children }) => {
         }
     }
 
-    // Call checkin function
+    // Call checkIn function
     const checkIn = async(weiPrice) => {
         try {
             const checkIn = await contract.checkIn(currentAccount, weiPrice);
@@ -289,57 +253,13 @@ export const BlockchainProvider = ({ children }) => {
         }
     }
 
-    // Get contract's balance
-    const getContractBalance = async() => {
-        try {
-            const contractBalance = await contract.balanceOf();
-            setContractBalance(ethers.utils.formatEther(contractBalance));
-            console.log('[getContractBalance]contractBalance: ' + contractBalance);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // Get owner's balance
-    const getOwnerBalance = async() => {
-        try {
-            if(owner) {
-                const ownerBalance = await contract.balanceOfOwner();
-                setOwnerBalance(ethers.utils.formatEther(ownerBalance));
-                console.log('[getOwnerBalance]ownerBalance: ' + ownerBalance);
-            } else {
-                console.log('[getOwnerBalance]owner: ' + owner);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // Owner withdraw
-    const ownerWithdraw = async() => {
-        try {
-            const ownerBalance = await contract.withdrawOwnerBalance();
-            await ownerBalance.wait;
-            // Update owner's balance and contract's balance
-            await getOwnerBalance();
-            await getContractBalance();            
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     // When variables changes
     useEffect(() => {
         checkNetwork();
         checkWalletConnection();
         checkRenterExists();
-        // getRenterBalance();
         getDue();
-        // getActualDuration();
-        // getTotalDuration();
         isOwner();
-        // getContractBalance();
-        // getOwnerBalance();
     }, [currentAccount, owner])
 
   return (
@@ -355,12 +275,9 @@ export const BlockchainProvider = ({ children }) => {
             checkIn,
             getDue,
             due,
-            deposit,
             makePayment,
             owner,
-            getOwnerBalance,
-            ownerWithdraw,
-            getContractBalance,
+            getActualDuration,
             actualDuration
         }}
     >
