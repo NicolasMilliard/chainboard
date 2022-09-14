@@ -24,7 +24,7 @@ const Rent = () => {
   })
 
   const handleSubmit = async() => {
-    await addRenter(currentAccount, true, false, 0, 0, 0, 0);
+    await addRenter(currentAccount, true, false, 0, 0, 0);
     console.log('[handleSubmit]: renter added');
   }
 
