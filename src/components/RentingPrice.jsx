@@ -4,11 +4,9 @@ import bsc from '../img/logo/bsc-short.svg'
 import { snowboards } from '../data/snowboards'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
-import { useStateContext } from '../contexts/ContextProvider'
 
 const RentingPrice = () => {
-    const { level } = useStateContext();
-    const { actualDuration } = useStateBlockchainContext();
+    const { actualDuration, level } = useStateBlockchainContext();
     return (
         <div>
             <p>Current total:</p>

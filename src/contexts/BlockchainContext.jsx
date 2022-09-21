@@ -10,10 +10,11 @@ export const BlockchainProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
     const [renter, setRenter] = useState();
     const [renterExists, setRenterExists] = useState();
+    const [size, setSize] = useState();
+    const [level, setLevel] = useState("");
     const [due, setDue] = useState();
     const [actualDuration, setActualDuration] = useState();
     const [totalDuration, setTotalDuration] = useState();
-    const [owner, setOwner] = useState(false);
 
     // Read-only access to the blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -23,6 +24,14 @@ export const BlockchainProvider = ({ children }) => {
 
     // Contract (BSC Testnet)
     const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    const handleLevel = (selectedLevel) => {
+        setLevel(selectedLevel);
+    }
+
+    const handleSnowboardSize = (e) => {
+        setSize(e.target.value);
+    }
 
     // Connect wallet and store address in the state
     const connectWallet = async () => {
@@ -101,10 +110,10 @@ export const BlockchainProvider = ({ children }) => {
     };
 
     // Add the user as a renter
-    const addRenter = async(currentAccount, canRent, isRenting, due, start, end) => {
+    const addRenter = async(currentAccount, canRent, isRenting, level, size, due, start, end) => {
         try {
-            console.log(`[addRenter]currentAccount: ${currentAccount} - ${canRent} - ${isRenting} - ${due} - ${start} - ${end}`);
-            const addRenter = await contract.addRenter(currentAccount, canRent, isRenting, due, start, end);
+            console.log(`[addRenter]currentAccount: ${currentAccount} - ${canRent} - ${isRenting} - ${level} - ${size} - ${due} - ${start} - ${end}`);
+            const addRenter = await contract.addRenter(currentAccount, canRent, isRenting, level, size, due, start, end);
             await addRenter.wait();
             checkRenterExists();
         } catch (error) {
@@ -125,6 +134,8 @@ export const BlockchainProvider = ({ children }) => {
                 // If renter exists, we get his status (canRent and isRenting)
                 if(renterExists) {
                     await getRenterStatus();
+                    await getLevel();
+                    await getSize();
                 }
             }
         } catch (error) {
@@ -139,6 +150,7 @@ export const BlockchainProvider = ({ children }) => {
                 const renter = await contract.getRenterStatus(currentAccount);
                 // Save canRent and isRenting values in the state
                 setRenter(renter);
+                console.log('[getRenterStatus]renter: ' + renter);
                 console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
                 console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
             }
@@ -193,13 +205,11 @@ export const BlockchainProvider = ({ children }) => {
     const makePayment = async() => {
         try {
             if(currentAccount) {
-                // const bnbValue = ethers.utils.parseEther(due);
                 const weiDue = (due * (10 ** 18)).toString();
                 const deposit = await contract.makePayment(currentAccount, { value: weiDue });
                 await deposit.wait();
 
                 console.log('[makePayment] weiDue: ' + weiDue);
-                // console.log('[makePayment] ethers.utils.parseEther(due): ' + ethers.utils.parseEther(due));
 
                 // Check if canRent, isRenting, totalDuration and due are correctly reset and store the results in appropriate states
                 await getRenterStatus();
@@ -214,11 +224,41 @@ export const BlockchainProvider = ({ children }) => {
     // Call checkOut function
     const checkOut = async() => {
         try {
-            const checkOut = await contract.checkOut(currentAccount);
+            const checkOut = await contract.checkOut(currentAccount, level, size);
             await checkOut.wait();
             
             // Update renter's status
             await getRenterStatus();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // Get the renter's level
+    const getLevel = async() => {
+        try {
+            if(currentAccount) {
+                const level = await contract.getLevel(currentAccount);
+                // Store the level in the state
+                setLevel(level);
+                console.log('[getLevel]level: ' + level);
+            } else {
+                console.log('[getLevel]level: error. currentAccount: ' + currentAccount + ' - renterExists: ' + renterExists);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // Get the renter's snowboard size
+    const getSize = async() => {
+        try {
+            if(currentAccount) {
+                const size = await contract.getSize(currentAccount);
+                // Store the size in the state
+                setSize(size);
+                console.log('[getSize]size: ' + size);
+            }            
         } catch (error) {
             console.log(error);
         }
@@ -239,28 +279,15 @@ export const BlockchainProvider = ({ children }) => {
         }
     }
 
-    // Call isOwner function
-    const isOwner = async() => {
-        try {
-            if(currentAccount) {
-                const owner = await contract.isOwner();
-                // Store the owner (boolean) in the state
-                setOwner(owner);
-                console.log('[isOwner]owner: ' + owner);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     // When variables changes
     useEffect(() => {
         checkNetwork();
         checkWalletConnection();
         checkRenterExists();
+        getLevel();
+        getSize();
         getDue();
-        isOwner();
-    }, [currentAccount, owner])
+    }, [currentAccount])
 
   return (
     <BlockchainContext.Provider
@@ -272,13 +299,16 @@ export const BlockchainProvider = ({ children }) => {
             renter,
             checkOut,
             getRenterStatus,
+            getLevel,
+            getSize,
             checkIn,
             getDue,
             due,
             makePayment,
-            owner,
             getActualDuration,
-            actualDuration
+            actualDuration,
+            size, setSize, handleSnowboardSize,
+            level, handleLevel,
         }}
     >
         { children }

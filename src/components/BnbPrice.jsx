@@ -3,10 +3,10 @@ import bsc from '../img/logo/bsc-short.svg'
 
 import { snowboards } from '../data/snowboards'
 
-import { useStateContext } from '../contexts/ContextProvider'
+import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 const BnbPrice = () => {
-  const { level } = useStateContext();
+  const { level } = useStateBlockchainContext();
   return (
     <div className='flex flex-wrap mb-20'>
       <div className='flex flex-wrap items-center'>

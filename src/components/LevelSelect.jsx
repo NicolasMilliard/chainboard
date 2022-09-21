@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
-import { useStateContext } from '../contexts/ContextProvider';
+import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 import { levels } from '../data/levels';
 
 const LevelSelect = () => {
-  const { handleLevel, level } = useStateContext();
+  const { handleLevel, level } = useStateBlockchainContext();
   const [selectedLevel, setSelectedLevel] = useState('beginner');
+
+  // console.log('level: ' + level);
 
   const active = 'flex items-center capitalize chainboard-icon-flash-button-active font-semibold';
   const normal = 'flex items-center capitalize chainboard-icon-flash-button';

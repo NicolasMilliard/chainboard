@@ -24,7 +24,7 @@ const Rent = () => {
   })
 
   const handleSubmit = async() => {
-    await addRenter(currentAccount, true, false, 0, 0, 0);
+    await addRenter(currentAccount, true, false, 'beginner', 142, 0, 0, 0);
     console.log('[handleSubmit]: renter added');
   }
 
@@ -33,9 +33,9 @@ const Rent = () => {
       <SnowboardSizeCalculation />
       <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8'>
         <div className='flex flex-col flex-grow flex-shrink basis-0 justify-center'>
-            <LevelSelect />
-            <SnowboardSize />
-            <BnbPrice />
+            {renterExists && <LevelSelect />}
+            {renterExists && <SnowboardSize />}
+            {renterExists && <BnbPrice />}
             {renterExists ? <Button text='Check out' customFunc={checkOut} /> : <Button text='Create my profile' customFunc={handleSubmit} />}
         </div>
         <div className='flex flex-grow flex-shrink basis-0'>
