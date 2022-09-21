@@ -1,11 +1,6 @@
 {
     "abi": [
       {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
         "inputs": [
           {
             "internalType": "address",
@@ -23,9 +18,19 @@
             "type": "bool"
           },
           {
-            "internalType": "uint256",
+            "internalType": "string",
+            "name": "level",
+            "type": "string"
+          },
+          {
+            "internalType": "uint8",
+            "name": "size",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint128",
             "name": "due",
-            "type": "uint256"
+            "type": "uint128"
           },
           {
             "internalType": "uint256",
@@ -51,9 +56,9 @@
             "type": "address"
           },
           {
-            "internalType": "uint256",
+            "internalType": "uint128",
             "name": "snowboardPrice",
-            "type": "uint256"
+            "type": "uint128"
           }
         ],
         "name": "checkIn",
@@ -67,12 +72,40 @@
             "internalType": "address",
             "name": "walletAddress",
             "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "level",
+            "type": "string"
+          },
+          {
+            "internalType": "uint8",
+            "name": "size",
+            "type": "uint8"
           }
         ],
         "name": "checkOut",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "makePayment",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
       },
       {
         "inputs": [
@@ -120,6 +153,25 @@
             "type": "address"
           }
         ],
+        "name": "getLevel",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "level",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
         "name": "getRenterStatus",
         "outputs": [
           {
@@ -131,6 +183,25 @@
             "internalType": "bool",
             "name": "isRenting",
             "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "getSize",
+        "outputs": [
+          {
+            "internalType": "uint8",
+            "name": "size",
+            "type": "uint8"
           }
         ],
         "stateMutability": "view",
@@ -156,32 +227,6 @@
         "type": "function"
       },
       {
-        "inputs": [],
-        "name": "isOwner",
-        "outputs": [
-          {
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "walletAddress",
-            "type": "address"
-          }
-        ],
-        "name": "makePayment",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-      },
-      {
         "inputs": [
           {
             "internalType": "address",
@@ -199,51 +244,7 @@
         ],
         "stateMutability": "view",
         "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "name": "renters",
-        "outputs": [
-          {
-            "internalType": "address",
-            "name": "walletAddress",
-            "type": "address"
-          },
-          {
-            "internalType": "bool",
-            "name": "canRent",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "isRenting",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "due",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "start",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "end",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
       }
     ],
-    "contractAddress": "0x0Ff8f2EfCaeDfea2b444ca6f0b2588Bfa3CE7f35"
+    "contractAddress": "0x87805926d4F0A8b29D9edfAD03d2289Ea3Dab9cC"
 }
