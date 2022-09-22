@@ -1,6 +1,11 @@
 {
     "abi": [
       {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
         "inputs": [
           {
             "internalType": "address",
@@ -88,24 +93,6 @@
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "walletAddress",
-            "type": "address"
-          }
-        ],
-        "name": "makePayment",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
       },
       {
         "inputs": [
@@ -234,6 +221,19 @@
             "type": "address"
           }
         ],
+        "name": "makePayment",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
         "name": "renterExists",
         "outputs": [
           {
@@ -246,5 +246,5 @@
         "type": "function"
       }
     ],
-    "contractAddress": "0x87805926d4F0A8b29D9edfAD03d2289Ea3Dab9cC"
+    "contractAddress": "0x89BDbAe5D48AFdDd40fB1Af8ed495E60e1D4561D"
 }

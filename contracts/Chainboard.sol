@@ -135,13 +135,10 @@ contract Chainboard {
     }
 
     // @notice Get due amount is usefull to display the due in the dApp
-    /* @dev Only a renter can rent a snowboard
-     * The end of the renting must be different than 0 to be sure the renter has already checkOut AND checkIn his snowboard
-    */
+    // @dev Only a renter can rent a snowboard
     // @param walletAddress is the current account of the user
     // @return the due of the renter
     function getDue(address walletAddress) public isRenter(walletAddress) view returns(uint) {
-        require(renters[walletAddress].end != 0, "You don't have a due at this time.");
         return renters[walletAddress].due;
     }
 
