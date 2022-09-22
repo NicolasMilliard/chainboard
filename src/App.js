@@ -13,7 +13,7 @@ import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
-    const { currentAccount } = useStateBlockchainContext();
+    const { renterExists } = useStateBlockchainContext();
   return (
     <>
       <BrowserRouter>
@@ -21,7 +21,7 @@ const App = () => {
         {/* Routes */}
         <Routes>
           {/* Display snowboards selection if connected. If not, display homepage. */}
-          <Route path='/' element={currentAccount ? <Rent /> : <Home />} />
+          <Route path='/' element={renterExists ? <Rent /> : <Home />} />
           <Route path='/renting' element={<Renting />} />
         </Routes>
       </BrowserRouter>
