@@ -10,6 +10,7 @@ import Renting from './pages/Renting'
 import { useStateBlockchainContext } from './contexts/BlockchainContext'
 
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
     const { currentAccount } = useStateBlockchainContext();

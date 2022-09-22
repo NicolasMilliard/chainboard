@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import LevelSelect from '../components/LevelSelect'
 import SnowboardSize from '../components/SnowboardSize'
@@ -30,6 +31,7 @@ const Rent = () => {
 
   return (
     <>
+      <ToastContainer />
       <SnowboardSizeCalculation />
       <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8'>
         <div className='flex flex-col flex-grow flex-shrink basis-0 justify-center'>

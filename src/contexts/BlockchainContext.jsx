@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import contractConfig from '../contract-config.json'
 import { ethers } from 'ethers'
+import { toast } from 'react-toastify'
 
 const { abi, contractAddress } = contractConfig;
 
@@ -61,8 +62,6 @@ export const BlockchainProvider = ({ children }) => {
             if(accounts.length) {
                 // Save user address in the state
                 setCurrentAccount(accounts[0]);
-            } else {
-                console.log("No accounts found");
             }
 
             // Is account changed?
@@ -70,7 +69,13 @@ export const BlockchainProvider = ({ children }) => {
                 window.location.reload();
             });
         } catch (error) {
-            console.log(error);
+            toast.error('Connection failed, please retry.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -104,7 +109,13 @@ export const BlockchainProvider = ({ children }) => {
                     ],
                 });
             } catch (error) {
-                console.log(error);
+                toast.info('Please add BSC Testnet to your MetaMask to use the application.', {
+                    position: 'top-right',
+                    autoClose: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true
+                });
             }
         }
     };
@@ -117,7 +128,13 @@ export const BlockchainProvider = ({ children }) => {
             await addRenter.wait();
             checkRenterExists();
         } catch (error) {
-            console.log(error);
+            toast.error('We cannot add you as a renter. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -139,7 +156,13 @@ export const BlockchainProvider = ({ children }) => {
                 }
             }
         } catch (error) {
-            console.log(error);
+            toast.error('We cannot check if you have an account. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -155,7 +178,13 @@ export const BlockchainProvider = ({ children }) => {
                 console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
             }
         } catch (error) {
-            console.log(error);
+            toast.error('We cannot check your account status. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -169,7 +198,13 @@ export const BlockchainProvider = ({ children }) => {
                 console.log('[getDue]due: ' + due);
             }            
         } catch (error) {
-            console.log(error);
+            toast.error('' + error.errorArgs, {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -183,7 +218,13 @@ export const BlockchainProvider = ({ children }) => {
                 console.log('[getActualDuration]actualDuration: ' + actualDuration);
             }
         } catch (error) {
-            console.log(error);
+            toast.error('We cannot check your actual renting duration. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -197,7 +238,13 @@ export const BlockchainProvider = ({ children }) => {
                 console.log('[getTotalDuration]totalDuration: ' + totalDuration);
             }            
         } catch (error) {
-            console.log(error);
+            toast.error('We cannot check your total renting duration. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -217,7 +264,13 @@ export const BlockchainProvider = ({ children }) => {
                 await getDue();
             }
         } catch (error) {
-            console.log(error);
+            toast.error('The payment has failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -230,7 +283,13 @@ export const BlockchainProvider = ({ children }) => {
             // Update renter's status
             await getRenterStatus();
         } catch (error) {
-            console.log(error);
+            toast.error('The transaction has failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -242,11 +301,15 @@ export const BlockchainProvider = ({ children }) => {
                 // Store the level in the state
                 setLevel(level);
                 console.log('[getLevel]level: ' + level);
-            } else {
-                console.log('[getLevel]level: error. currentAccount: ' + currentAccount + ' - renterExists: ' + renterExists);
             }
         } catch (error) {
-            console.log(error);
+            toast.error('The transaction has failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -260,7 +323,13 @@ export const BlockchainProvider = ({ children }) => {
                 console.log('[getSize]size: ' + size);
             }            
         } catch (error) {
-            console.log(error);
+            toast.error('The transaction has failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
@@ -275,7 +344,13 @@ export const BlockchainProvider = ({ children }) => {
             await getDue();
             await getTotalDuration();
         } catch (error) {
-            console.log(error);
+            toast.error('The transaction has failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
         }
     }
 
