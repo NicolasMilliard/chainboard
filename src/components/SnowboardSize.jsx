@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
+import { useStateContext } from '../contexts/ContextProvider'
 
 const SnowboardSize = () => {
-  const { size, handleSnowboardSize, setIsDisplay } = useStateBlockchainContext();
-
-  // console.log(size);
+  const { size, handleSnowboardSize } = useStateBlockchainContext();
+  const { setIsDisplay } = useStateContext();
 
   // Manage background color's track of the input range
   const handleInputChange = (e) => {
