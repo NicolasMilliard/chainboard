@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import Button from '../components/Button'
 import RentingPrice from '../components/RentingPrice'
@@ -15,9 +16,9 @@ const Renting = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-      // if renting is false and due equal to 0, redirect to the home/rent page
+      // if renting is false and due equal to '0.0', redirect to the home/rent page
       if(renter) {
-        if(renter.isRenting === false && due === undefined) {
+        if(renter.isRenting === false && due === '0.0') {
           navigate('/');
         } else {
           console.log('renter.isRenting: ' + renter.isRenting);
@@ -41,12 +42,14 @@ const Renting = () => {
       }
 
   return (
-    <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
+    <>
+      <ToastContainer />
+      <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
         <div className='flex flex-col flex-grow flex-shrink basis-0'>
           {/* If the user has a pending due, he can't rent a snowboard so ActualDuration must be hidden */}
-          {!due && <ActualDuration />}
+          {due && <ActualDuration />}
            {/* If the user has a pending due, he can't rent a snowboard so RentingPrice must be hidden */}
-          {!due && <RentingPrice />}
+          {due && <RentingPrice />}
           {/* If the user is currently renting a snowboard */}
           {renter && renter.isRenting && <Button text='Check in' customFunc={handleCheckIn} />}
           {/* If due greater than 0 */}
@@ -55,7 +58,8 @@ const Renting = () => {
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />
         </div>
-    </div>
+      </div>
+    </>
   )
 }
 
