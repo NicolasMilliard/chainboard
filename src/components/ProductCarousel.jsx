@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { useStateContext } from '../contexts/ContextProvider';
+import { useStateBlockchainContext } from '../contexts/BlockchainContext';
 
 import { snowboards } from '../data/snowboards'
 
 const ProductCarousel = () => {
-  const { size, level } = useStateContext();
+  const { size, level } = useStateBlockchainContext();
 
   return (
     <div className='carousel-container'>
