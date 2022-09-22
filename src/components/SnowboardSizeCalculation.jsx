@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+
 import { useStateContext } from '../contexts/ContextProvider';
+import { useStateBlockchainContext } from '../contexts/BlockchainContext';
 
 import CloseIcon from './CloseIcon';
 
 const SnowboardSizeCalculation = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting },} = useForm();
-  const { isDisplay, setIsDisplay, setSize } = useStateContext();
+  const { handleLevel, setSize } = useStateBlockchainContext();
+  const { isDisplay, setIsDisplay } = useStateContext();
 
   const modalDisplay = 'flex justify-center items-center';
   const modalHidden = 'hidden justify-center items-center';
@@ -55,9 +58,15 @@ const SnowboardSizeCalculation = () => {
     const sizeDependingOnWeight = weight * weightRatio;
 
     // Calculate final size : we do the average between sizeDependingOnHeight and sizeDependingOnWeight. Then, we add levelRatio and styleRatio
-    const snowboardSize = Math.round(((sizeDependingOnHeight + sizeDependingOnWeight) / 2) + levelRatio + styleRatio);
+    let snowboardSize = Math.round(((sizeDependingOnHeight + sizeDependingOnWeight) / 2) + levelRatio + styleRatio);
+    // Maximum value for snowboardSize is 167 cm
+    if(snowboardSize > 167) {
+        snowboardSize = 167;
+    }
 
-    // Update the size and close modal window
+    // Update the level, the size and close modal window
+    console.log('level: ' + level + ' - snowboardSize: ' + snowboardSize);
+    handleLevel(level);
     setSize(snowboardSize);
     setIsDisplay(false);
   }
