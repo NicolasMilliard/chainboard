@@ -203,6 +203,10 @@ input[type="range"]::-ms-thumb {
     max-width: 220px;
 }
 
+.chainboard-default-mini-btn {
+    min-width: 220px;
+}
+
 /* Snowboard Size Calculation */
 #snowboard-size-calculation-container {
     position: absolute;
