@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Rent from './pages/Rent'
 import Renting from './pages/Renting'
+import Payment from './pages/Payment'
 
 import { useStateBlockchainContext } from './contexts/BlockchainContext'
 
@@ -23,6 +24,7 @@ const App = () => {
           {/* Display snowboards selection if connected. If not, display homepage. */}
           <Route path='/' element={renterExists ? <Rent /> : <Home />} />
           <Route path='/renting' element={<Renting />} />
+          <Route path='/payment' element={<Payment />} />
         </Routes>
       </BrowserRouter>
     </>
