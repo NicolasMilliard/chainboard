@@ -16,6 +16,8 @@ export const BlockchainProvider = ({ children }) => {
     const [due, setDue] = useState();
     const [actualDuration, setActualDuration] = useState();
     const [totalDuration, setTotalDuration] = useState();
+    const [start, setStart] = useState();
+    const [end, setEnd] = useState();
 
     // Read-only access to the blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -69,7 +71,7 @@ export const BlockchainProvider = ({ children }) => {
                 window.location.reload();
             });
         } catch (error) {
-            toast.error('Connection failed, please retry.', {
+            toast.error('The connection has failed. Please try again.', {
                 position: 'top-right',
                 autoClose: 5000,
                 closeOnClick: true,
@@ -236,9 +238,43 @@ export const BlockchainProvider = ({ children }) => {
                 // Store the totalDuration in the state and make it a number
                 setTotalDuration(Number(totalDuration));
                 console.log('[getTotalDuration]totalDuration: ' + totalDuration);
+            }
+        } catch(error) {
+            
+        }
+    }
+
+    // Get the rental start
+    const getStart = async() => {
+        try {
+            if(currentAccount) {
+                const start = await contract.getStart(currentAccount);
+                // Store the start in the state
+                setStart(start);
+                console.log('[getStart]start: ' + start);
             }            
         } catch (error) {
-            toast.error('We cannot check your total renting duration. Please try again.', {
+            toast.error('' + error.errorArgs, {
+                position: 'top-right',
+                autoClose: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true
+            });
+        }
+    }
+
+    // Get the rental end
+    const getEnd = async() => {
+        try {
+            if(currentAccount) {
+                const end = await contract.getEnd(currentAccount);
+                // Store the end in the state
+                setEnd(end);
+                console.log('[getEnd]end: ' + end);
+            }            
+        } catch (error) {
+            toast.error('' + error.errorArgs, {
                 position: 'top-right',
                 autoClose: 5000,
                 closeOnClick: true,
@@ -262,8 +298,17 @@ export const BlockchainProvider = ({ children }) => {
                 await getRenterStatus();
                 await getTotalDuration();
                 await getDue();
+
+                toast.success('The payment was successful. Thank you!', {
+                    position: 'top-right',
+                    autoClose: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true
+                });
             }
         } catch (error) {
+            console.log(error);
             toast.error('The payment has failed. Please try again.', {
                 position: 'top-right',
                 autoClose: 5000,
@@ -354,14 +399,10 @@ export const BlockchainProvider = ({ children }) => {
         }
     }
 
-    // When variables changes
     useEffect(() => {
         checkNetwork();
         checkWalletConnection();
         checkRenterExists();
-        getLevel();
-        getSize();
-        getDue();
     }, [currentAccount])
 
   return (
@@ -382,8 +423,12 @@ export const BlockchainProvider = ({ children }) => {
             makePayment,
             getActualDuration,
             actualDuration,
+            getTotalDuration,
+            totalDuration,
             size, setSize, handleSnowboardSize,
             level, handleLevel,
+            start, getStart,
+            end, getEnd
         }}
     >
         { children }
