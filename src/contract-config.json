@@ -1,11 +1,6 @@
 {
     "abi": [
       {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
         "inputs": [
           {
             "internalType": "address",
@@ -102,6 +97,24 @@
             "type": "address"
           }
         ],
+        "name": "makePayment",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
         "name": "getActualDuration",
         "outputs": [
           {
@@ -126,6 +139,25 @@
           {
             "internalType": "uint256",
             "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "name": "getEnd",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "end",
             "type": "uint256"
           }
         ],
@@ -202,11 +234,11 @@
             "type": "address"
           }
         ],
-        "name": "getTotalDuration",
+        "name": "getStart",
         "outputs": [
           {
             "internalType": "uint256",
-            "name": "",
+            "name": "start",
             "type": "uint256"
           }
         ],
@@ -221,9 +253,15 @@
             "type": "address"
           }
         ],
-        "name": "makePayment",
-        "outputs": [],
-        "stateMutability": "payable",
+        "name": "getTotalDuration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -246,5 +284,5 @@
         "type": "function"
       }
     ],
-    "contractAddress": "0x89BDbAe5D48AFdDd40fB1Af8ed495E60e1D4561D"
+    "contractAddress": "0xA4A71569C7Ee173Ea01b7B1feE8184b0E5b50107"
 }

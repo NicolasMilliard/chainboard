@@ -125,6 +125,22 @@ contract Chainboard {
         setDue(walletAddress, snowboardPrice);
     }
 
+    // @notice Get the start of the rental
+    // @dev If start is not defined, it returns 0
+    // @param walletAddress is the current account of the user
+    // @return a uint
+    function getStart(address walletAddress) public isRenter(walletAddress) view returns(uint256 start) {
+        start = renters[walletAddress].start;
+    }
+
+    // @notice Get the end of the rental
+    // @dev If end is not defined, it returns 0
+    // @param walletAddress is the current account of the user
+    // @return a uint
+    function getEnd(address walletAddress) public isRenter(walletAddress) view returns(uint256 end) {
+        end = renters[walletAddress].end;
+    }
+
     // @notice Set due amount
     // @dev When the renter checkIn his snowboard, the due is calculate regarding the snowboardPrice
     // @param walletAddress is the current account of the user
