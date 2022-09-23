@@ -12,15 +12,26 @@ import Button from '../components/Button'
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 const Rent = () => {
-  const { currentAccount, checkOut, renter, addRenter, renterExists } = useStateBlockchainContext();
+  const { currentAccount, checkOut, renter, addRenter, renterExists, getDue, due } = useStateBlockchainContext();
   let navigate = useNavigate();
 
   useEffect(() => {
-    // if renting is true, redirect to the renting page
+    getDue();
+    // if renter exist
     if(renter) {
+      // if renter is renting
       if(renter.isRenting) {
         navigate('/renting');
+        return;
       }
+      // if renter has a pending due
+      if(due > 0) {
+        navigate('/payment');
+        return;
+      }
+    } else {
+      navigate('/');
+      return;
     }
   })
 

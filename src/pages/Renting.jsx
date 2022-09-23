@@ -6,26 +6,28 @@ import Button from '../components/Button'
 import RentingPrice from '../components/RentingPrice'
 import ProductCarousel from '../components/ProductCarousel'
 import ActualDuration from '../components/ActualDuration'
+import TotalDuration from '../components/TotalDuration'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 import { snowboards } from '../data/snowboards'
 
 const Renting = () => {
-    const { currentAccount, renter, checkIn, level, due, makePayment } = useStateBlockchainContext();
+    const { currentAccount, renter, checkIn, level, due, getDue, makePayment } = useStateBlockchainContext();
     let navigate = useNavigate();
 
     useEffect(() => {
-      // if renting is false and due equal to '0.0', redirect to the home/rent page
+      getDue();
+
+      // if renter exist      
       if(renter) {
-        if(renter.isRenting === false && due === '0.0') {
-          navigate('/');
-        } else {
-          console.log('renter.isRenting: ' + renter.isRenting);
-          console.log('due: ' + due);
+        if(renter.isRenting === false) {
+          if(due > 0) {
+            navigate('/payment');
+          } else {
+            navigate('/');
+          }
         }
-      } else {
-        console.log('renter error: ' + renter);
       }
     })
 
@@ -44,12 +46,12 @@ const Renting = () => {
   return (
     <>
       <ToastContainer />
-      <div className='flex flex-grow flex-shrink basis-0 justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
+      <div className='flex flex-grow flex-shrink basis-0 items-center justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
         <div className='flex flex-col flex-grow flex-shrink basis-0'>
           {/* If the user has a pending due, he can't rent a snowboard so ActualDuration must be hidden */}
-          {due && <ActualDuration />}
+          {due === '0.0' ? <ActualDuration /> : <TotalDuration />}
            {/* If the user has a pending due, he can't rent a snowboard so RentingPrice must be hidden */}
-          {due && <RentingPrice />}
+          {due === '0.0' && <RentingPrice />}
           {/* If the user is currently renting a snowboard */}
           {renter && renter.isRenting && <Button text='Check in' customFunc={handleCheckIn} />}
           {/* If due greater than 0 */}
