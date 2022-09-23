@@ -26,7 +26,7 @@ const SnowboardSize = () => {
           <input id='snowboard-size' type='range' min='138' max='167' defaultValue={size} className='chainboard-input-range' style={{backgroundSize: (size - 138) * 100 / (167 - 138) + '% 100%'}} onChange={handleSnowboardSize} onInput={handleInputChange} />
           <span id='snowboard-size-choice' className='ml-3'>{size} cm</span>            
         </div>
-        <button onClick={() => {setIsDisplay(true)}}>Calculate my size's snowboard</button>
+        <button className='mt-10' onClick={() => {setIsDisplay(true)}}>Calculate my size's snowboard</button>
     </div>
   )
 }
