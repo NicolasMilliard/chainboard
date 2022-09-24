@@ -20,14 +20,3 @@ const TotalDuration = () => {
 }
 
 export default TotalDuration
-
-
-// IMPORTANT: for testing, the price per hour is converted to price per minute (so all calculations are relative to minutes)
-// const MS_PER_MINUTE = 60000;
-// if(actualDuration !== undefined) {
-//   const startDate = new Date(new Date() - (actualDuration * MS_PER_MINUTE));
-//   const startRentingDateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(startDate.getTime());
-
-//   console.log('date: ' + startRentingDateFormat);
-//   return startRentingDateFormat;
-// }
