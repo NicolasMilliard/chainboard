@@ -3,18 +3,15 @@ import FlashIcon from '../components/FlashIcon'
 export const levels = [
     {
         level: 'beginner',
-        icon: <FlashIcon />,
-        iconNumber: 1
+        icon: <FlashIcon />
     },
     {
         level: 'intermediate',
-        icon: <FlashIcon />,
-        iconNumber: 2
+        icon: <><FlashIcon /><FlashIcon /></>
     },
     {
         level: 'expert',
-        icon: <FlashIcon />,
-        iconNumber: 3
+        icon: <><FlashIcon /><FlashIcon /><FlashIcon /></>
     },
     
 ]
