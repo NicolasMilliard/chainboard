@@ -13,7 +13,7 @@ const LevelSelect = () => {
 
   useEffect(() => {
     setSelectedLevel(() => level);
-  }, [selectedLevel])
+  }, [level])
 
   return (
     <div className='mb-20'>
@@ -23,7 +23,7 @@ const LevelSelect = () => {
             key={item.level}
             id={item.level}
             type='submit'
-            className={selectedLevel == item.level ? active : normal}
+            className={selectedLevel === item.level ? active : normal}
             onClick={() => handleLevel(item.level)}
           >
             {item.icon}
