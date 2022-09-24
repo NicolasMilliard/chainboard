@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useStateContext } from '../contexts/ContextProvider';
@@ -7,7 +7,7 @@ import { useStateBlockchainContext } from '../contexts/BlockchainContext';
 import CloseIcon from './CloseIcon';
 
 const SnowboardSizeCalculation = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting },} = useForm();
+  const { register, handleSubmit } = useForm();
   const { handleLevel, setSize } = useStateBlockchainContext();
   const { isDisplay, setIsDisplay } = useStateContext();
 
@@ -23,10 +23,10 @@ const SnowboardSizeCalculation = () => {
     let weightRatio;
 
     // If level is different than beginner, it adds one centimer to the calcul
-    level != 'beginner' ? levelRatio = 1 : levelRatio = 0;
+    level !== 'beginner' ? levelRatio = 1 : levelRatio = 0;
 
     // If style is equal to freeride, it adds four centimers to the calcul
-    style == 'freeride' ? styleRatio = 4 : styleRatio = 0;
+    style === 'freeride' ? styleRatio = 4 : styleRatio = 0;
 
     // Calculate size depending on height
     const sizeDependingOnHeight = height * 0.87;
@@ -59,13 +59,14 @@ const SnowboardSizeCalculation = () => {
 
     // Calculate final size : we do the average between sizeDependingOnHeight and sizeDependingOnWeight. Then, we add levelRatio and styleRatio
     let snowboardSize = Math.round(((sizeDependingOnHeight + sizeDependingOnWeight) / 2) + levelRatio + styleRatio);
+
     // Maximum value for snowboardSize is 167 cm
     if(snowboardSize > 167) {
         snowboardSize = 167;
     }
 
     // Update the level, the size and close modal window
-    console.log('level: ' + level + ' - snowboardSize: ' + snowboardSize);
+    // console.log('level: ' + level + ' - snowboardSize: ' + snowboardSize);
     handleLevel(level);
     setSize(snowboardSize);
     setIsDisplay(false);
