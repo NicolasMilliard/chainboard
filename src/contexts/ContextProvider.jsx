@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react'
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-    const [isDisplay, setIsDisplay] = useState(false);
+    const [isDisplay, setIsDisplay] = useState(false);    
 
     return (
         <StateContext.Provider
