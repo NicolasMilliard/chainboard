@@ -17,7 +17,7 @@ const ActualDuration = () => {
             const startDate = new Date(new Date() - (actualDuration * MS_PER_MINUTE));
             const startRentingDateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(startDate.getTime());
 
-            console.log('date: ' + startRentingDateFormat);
+            // console.log('date: ' + startRentingDateFormat);
             return startRentingDateFormat;
           }
         }
