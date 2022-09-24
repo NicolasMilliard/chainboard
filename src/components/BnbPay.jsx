@@ -1,5 +1,6 @@
 import React from 'react'
 import bsc from '../img/logo/bsc-short.svg'
+
 import { snowboards } from '../data/snowboards'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
@@ -15,13 +16,16 @@ const BnbPay = () => {
       </div>
       <div className='ml-4'>
         {snowboards.map(item => {
-          if(item.level === level)
-          return (
-            <p key={item.level}>
-              <span className='text-[#f2504b] font-semibold text-xl'>{due} BNB</span><br />
-              <span><abbr title='Duration is calculate in minutes to facilitate tests.'>{totalDuration} {totalDuration == 1 ? 'hour*' : 'hours*'} of renting.</abbr></span>
-          </p>
-          )
+          if(item.level === level) {
+            return (
+              <p key={item.level}>
+                <span className='text-[#f2504b] font-semibold text-xl'>{due} BNB</span><br />
+                <span><abbr title='Duration is calculate in minutes to facilitate tests.'>{totalDuration} {totalDuration === 1 ? 'hour*' : 'hours*'} of renting.</abbr></span>
+            </p>
+            )
+          } else {
+            return null;
+          }          
         })}
       </div>
     </div>
