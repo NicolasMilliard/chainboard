@@ -11,13 +11,14 @@ export const BlockchainProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
     const [renter, setRenter] = useState();
     const [renterExists, setRenterExists] = useState();
-    const [size, setSize] = useState();
+    const [size, setSize] = useState("");
     const [level, setLevel] = useState("");
     const [due, setDue] = useState();
     const [actualDuration, setActualDuration] = useState();
     const [totalDuration, setTotalDuration] = useState();
     const [start, setStart] = useState();
     const [end, setEnd] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     // Read-only access to the blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -38,7 +39,7 @@ export const BlockchainProvider = ({ children }) => {
 
     // Connect wallet and store address in the state
     const connectWallet = async () => {
-        try {
+        try {            
             // Is Metamask installed?
             if(!window.ethereum) return alert("Please install Metamask.")
 
@@ -47,7 +48,6 @@ export const BlockchainProvider = ({ children }) => {
             // Save user address in the state
             setCurrentAccount(accounts[0]);
         } catch (error) {
-            console.log(error);
             throw new Error("No ethereum object.");
         }
     }
@@ -125,11 +125,20 @@ export const BlockchainProvider = ({ children }) => {
     // Add the user as a renter
     const addRenter = async(currentAccount, canRent, isRenting, level, size, due, start, end) => {
         try {
-            console.log(`[addRenter]currentAccount: ${currentAccount} - ${canRent} - ${isRenting} - ${level} - ${size} - ${due} - ${start} - ${end}`);
+            // Display loader
+            setIsLoading(true);
+
+            // console.log(`[addRenter]currentAccount: ${currentAccount} - ${canRent} - ${isRenting} - ${level} - ${size} - ${due} - ${start} - ${end}`);
             const addRenter = await contract.addRenter(currentAccount, canRent, isRenting, level, size, due, start, end);
             await addRenter.wait();
             checkRenterExists();
+
+            // Hide loader
+            setIsLoading(false);
         } catch (error) {
+            // Hide loader
+            setIsLoading(false);
+
             toast.error('We cannot add you as a renter. Please try again.', {
                 position: 'top-right',
                 autoClose: 5000,
@@ -143,12 +152,12 @@ export const BlockchainProvider = ({ children }) => {
     // Check if the renter exists
     const checkRenterExists = async() => {
         try {
-            console.log('[checkRenterExists]currentAccount: ' + currentAccount);
+            // console.log('[checkRenterExists]currentAccount: ' + currentAccount);
             if(currentAccount) {
                 // Return true if renter exists
                 const renterExists = await contract.renterExists(currentAccount);
                 setRenterExists(renterExists);
-                console.log('[checkRenterExists]renterExists: ' + renterExists);
+                // console.log('[checkRenterExists]renterExists: ' + renterExists);
 
                 // If renter exists, we get his status (canRent and isRenting)
                 if(renterExists) {
@@ -175,9 +184,9 @@ export const BlockchainProvider = ({ children }) => {
                 const renter = await contract.getRenterStatus(currentAccount);
                 // Save canRent and isRenting values in the state
                 setRenter(renter);
-                console.log('[getRenterStatus]renter: ' + renter);
-                console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
-                console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
+                // console.log('[getRenterStatus]renter: ' + renter);
+                // console.log('[getRenterStatus]renter.canRent: ' + renter.canRent);
+                // console.log('[getRenterStatus]renter.isRenting: ' + renter.isRenting);
             }
         } catch (error) {
             toast.error('We cannot check your account status. Please try again.', {
@@ -197,7 +206,7 @@ export const BlockchainProvider = ({ children }) => {
                 const due = await contract.getDue(currentAccount);
                 // Store the due in the state
                 setDue(ethers.utils.formatEther(due));
-                console.log('[getDue]due: ' + due);
+                // console.log('[getDue]due: ' + due);
             }            
         } catch (error) {
             toast.error('' + error.errorArgs, {
@@ -217,7 +226,7 @@ export const BlockchainProvider = ({ children }) => {
                 const actualDuration = await contract.getActualDuration(currentAccount);
                 // Store the actualDuration in the state and make it a number
                 setActualDuration(Number(actualDuration));
-                console.log('[getActualDuration]actualDuration: ' + actualDuration);
+                // console.log('[getActualDuration]actualDuration: ' + actualDuration);
             }
         } catch (error) {
             toast.error('We cannot check your actual renting duration. Please try again.', {
@@ -237,7 +246,7 @@ export const BlockchainProvider = ({ children }) => {
                 const totalDuration = await contract.getTotalDuration(currentAccount);
                 // Store the totalDuration in the state and make it a number
                 setTotalDuration(Number(totalDuration));
-                console.log('[getTotalDuration]totalDuration: ' + totalDuration);
+                // console.log('[getTotalDuration]totalDuration: ' + totalDuration);
             }
         } catch(error) {
             
@@ -251,7 +260,7 @@ export const BlockchainProvider = ({ children }) => {
                 const start = await contract.getStart(currentAccount);
                 // Store the start in the state
                 setStart(start);
-                console.log('[getStart]start: ' + start);
+                // console.log('[getStart]start: ' + start);
             }            
         } catch (error) {
             toast.error('' + error.errorArgs, {
@@ -271,7 +280,7 @@ export const BlockchainProvider = ({ children }) => {
                 const end = await contract.getEnd(currentAccount);
                 // Store the end in the state
                 setEnd(end);
-                console.log('[getEnd]end: ' + end);
+                // console.log('[getEnd]end: ' + end);
             }            
         } catch (error) {
             toast.error('' + error.errorArgs, {
@@ -287,17 +296,23 @@ export const BlockchainProvider = ({ children }) => {
     // Make the payment
     const makePayment = async() => {
         try {
+            // Display loader
+            setIsLoading(true);
+
             if(currentAccount) {
                 const weiDue = (due * (10 ** 18)).toString();
                 const deposit = await contract.makePayment(currentAccount, { value: weiDue });
                 await deposit.wait();
 
-                console.log('[makePayment] weiDue: ' + weiDue);
+                // console.log('[makePayment] weiDue: ' + weiDue);
 
                 // Check if canRent, isRenting, totalDuration and due are correctly reset and store the results in appropriate states
                 await getRenterStatus();
                 await getTotalDuration();
                 await getDue();
+
+                // Hide loader
+                setIsLoading(false);
 
                 toast.success('The payment was successful. Thank you!', {
                     position: 'top-right',
@@ -308,7 +323,9 @@ export const BlockchainProvider = ({ children }) => {
                 });
             }
         } catch (error) {
-            console.log(error);
+            // Hide loader
+            setIsLoading(false);
+
             toast.error('The payment has failed. Please try again.', {
                 position: 'top-right',
                 autoClose: 5000,
@@ -322,12 +339,21 @@ export const BlockchainProvider = ({ children }) => {
     // Call checkOut function
     const checkOut = async() => {
         try {
+            // Display loader
+            setIsLoading(true);
+
             const checkOut = await contract.checkOut(currentAccount, level, size);
             await checkOut.wait();
+
+            // Hide loader
+            setIsLoading(false);
             
             // Update renter's status
             await getRenterStatus();
         } catch (error) {
+            // Hide loader
+            setIsLoading(false);
+
             toast.error('The transaction has failed. Please try again.', {
                 position: 'top-right',
                 autoClose: 5000,
@@ -345,7 +371,7 @@ export const BlockchainProvider = ({ children }) => {
                 const level = await contract.getLevel(currentAccount);
                 // Store the level in the state
                 setLevel(level);
-                console.log('[getLevel]level: ' + level);
+                // console.log('[getLevel]level: ' + level);
             }
         } catch (error) {
             toast.error('The transaction has failed. Please try again.', {
@@ -365,7 +391,7 @@ export const BlockchainProvider = ({ children }) => {
                 const size = await contract.getSize(currentAccount);
                 // Store the size in the state
                 setSize(size);
-                console.log('[getSize]size: ' + size);
+                // console.log('[getSize]size: ' + size);
             }            
         } catch (error) {
             toast.error('The transaction has failed. Please try again.', {
@@ -381,14 +407,23 @@ export const BlockchainProvider = ({ children }) => {
     // Call checkIn function
     const checkIn = async(weiPrice) => {
         try {
+            // Display loader
+            setIsLoading(true);
+
             const checkIn = await contract.checkIn(currentAccount, weiPrice);
             await checkIn.wait();
+
+            // Hide loader
+            setIsLoading(false);
 
             // Update renter's status, due actual duration and total duration
             await getRenterStatus();
             await getDue();
             await getTotalDuration();
         } catch (error) {
+            // Hide loader
+            setIsLoading(false);
+
             toast.error('The transaction has failed. Please try again.', {
                 position: 'top-right',
                 autoClose: 5000,
@@ -428,7 +463,8 @@ export const BlockchainProvider = ({ children }) => {
             size, setSize, handleSnowboardSize,
             level, handleLevel,
             start, getStart,
-            end, getEnd
+            end, getEnd,
+            isLoading, setIsLoading
         }}
     >
         { children }
