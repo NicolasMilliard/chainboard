@@ -8,11 +8,12 @@ import SnowboardSizeCalculation from '../components/SnowboardSizeCalculation'
 import ProductCarousel from '../components/ProductCarousel'
 import BnbPrice from '../components/BnbPrice'
 import Button from '../components/Button'
+import ButtonLoader from '../components/ButtonLoader'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 const Rent = () => {
-  const { currentAccount, checkOut, renter, addRenter, renterExists, getDue, due } = useStateBlockchainContext();
+  const { currentAccount, checkOut, renter, addRenter, renterExists, getDue, due, isLoading } = useStateBlockchainContext();
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Rent = () => {
       navigate('/');
       return;
     }
-  })
+  }, [renter, due, getDue, navigate])
 
   const handleSubmit = async() => {
     await addRenter(currentAccount, true, false, 'beginner', 142, 0, 0, 0);
@@ -49,7 +50,7 @@ const Rent = () => {
             {renterExists && <LevelSelect />}
             {renterExists && <SnowboardSize />}
             {renterExists && <BnbPrice />}
-            {renterExists ? <Button text='Check out' customFunc={checkOut} /> : <Button text='Create my profile' customFunc={handleSubmit} />}
+            { isLoading ? <button className='flex justify-center items-center chainboard-default-btn bg-[#f2504b] px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'><ButtonLoader /></button> : renterExists ? <Button text='Check out' customFunc={checkOut} /> : <Button text='Create my profile' customFunc={handleSubmit} /> }
         </div>
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />

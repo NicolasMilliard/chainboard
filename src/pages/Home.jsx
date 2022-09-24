@@ -3,16 +3,17 @@ import { ToastContainer } from 'react-toastify'
 
 import ConnectWalletButton from '../components/ConnectWalletButton'
 import Button from '../components/Button'
+import ButtonLoader from '../components/ButtonLoader'
 import bsc from '../img/logo/bsc.svg'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 const Home = () => {
-    const { currentAccount, renterExists, addRenter } = useStateBlockchainContext();
+    const { currentAccount, renterExists, addRenter, isLoading } = useStateBlockchainContext();
 
     const handleSubmit = async() => {
         await addRenter(currentAccount, true, false, 'beginner', 142, 0, 0, 0);
-        console.log('[handleSubmit]: renter added');
+        // console.log('[handleSubmit]: renter added');
       }
 
     return (
@@ -34,7 +35,7 @@ const Home = () => {
                             <div>
                                 <h1 className='font-extrabold text-2xl sm:text-6xl sm:leading-tight'>Congrats! 🎉<br />Your wallet is <span className='text-[#f2504b]'>connected</span>!</h1>
                                 <p className='my-10 max-w-md leading-7'>Create your profile to access to the snowboards selection.</p>
-                                <Button text='Create my profile' customFunc={handleSubmit} />
+                                { isLoading ? <button className='flex items-center bg-[#f2504b] px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'><ButtonLoader /></button> : <Button text='Create my profile' customFunc={handleSubmit} /> }
                             </div>
                     }
                 </div>

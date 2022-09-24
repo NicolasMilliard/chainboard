@@ -4,11 +4,12 @@ import { ToastContainer } from 'react-toastify'
 
 import ProductCarousel from '../components/ProductCarousel'
 import BnbPay from '../components/BnbPay'
+import ButtonLoader from '../components/ButtonLoader'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 const Payment = () => {
-    const { currentAccount, renter, start, getStart, end, getEnd, getTotalDuration, getDue, due, makePayment } = useStateBlockchainContext();
+    const { currentAccount, renter, start, getStart, end, getEnd, getTotalDuration, getDue, due, makePayment, isLoading } = useStateBlockchainContext();
     const TIMESTAMP_IN_MILLISECONDS = 1000;
     let navigate = useNavigate();
 
@@ -17,8 +18,8 @@ const Payment = () => {
 
         // if renter exist
         if(renter) {
-            console.log('payemnt renter.isRenting: ' + renter.isRenting);
-            console.log('payment due:' + due);
+            // console.log('payemnt renter.isRenting: ' + renter.isRenting);
+            // console.log('payment due:' + due);
 
             // if renter is renting
             if(renter.isRenting) {
@@ -32,7 +33,7 @@ const Payment = () => {
                 return;
             }
         } else {
-            console.log('renter is false');
+            // console.log('renter is false');
         }
 
         getStart();
@@ -72,9 +73,9 @@ const Payment = () => {
                                 :
                                     <>
                                         <p>Your rental has started on <strong>{startDateFormat()}</strong> and has ended on <strong>{endDateFormat()}</strong>.</p>
-                                        <p className='mt-10'>{due === 0 ? 'You have pay:' : 'You need to pay:'}</p>
+                                        <p className='mt-10'>You need to pay:</p>
                                         <BnbPay />
-                                        <button onClick={makePayment} className='chainboard-default-btn bg-[#f2504b] mb-6 px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'>Pay {due} BNB</button>
+                                        { isLoading ? <button className='flex items-center bg-[#f2504b] px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'><ButtonLoader /></button> : <button onClick={makePayment} className='chainboard-default-btn bg-[#f2504b] mb-6 px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'>Pay {due} BNB</button> }
                                     </>
                             }
                         </div>

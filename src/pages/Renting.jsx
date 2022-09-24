@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
 import Button from '../components/Button'
+import ButtonLoader from '../components/ButtonLoader'
 import RentingPrice from '../components/RentingPrice'
 import ProductCarousel from '../components/ProductCarousel'
 import ActualDuration from '../components/ActualDuration'
-import TotalDuration from '../components/TotalDuration'
 
 import { useStateBlockchainContext } from '../contexts/BlockchainContext'
 
 import { snowboards } from '../data/snowboards'
 
 const Renting = () => {
-    const { currentAccount, renter, checkIn, level, due, getDue, makePayment } = useStateBlockchainContext();
+    const { renter, checkIn, level, due, getDue, isLoading } = useStateBlockchainContext();
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -37,8 +37,11 @@ const Renting = () => {
             const price = item.price;
             // price must be sent in wei as a string
             const weiPrice = (price * (10 ** 18)).toString();
-            console.log('currentAccount: ' + currentAccount + ' - price: ' + weiPrice);
+            // console.log('currentAccount: ' + currentAccount + ' - price: ' + weiPrice);
             checkIn(weiPrice);
+            return null;
+          } else {
+            return null;
           }
         })
       }
@@ -48,14 +51,10 @@ const Renting = () => {
       <ToastContainer />
       <div className='flex flex-grow flex-shrink basis-0 items-center justify-between mx-auto max-w-7xl mt-20 px-8 sm:mt-40'>
         <div className='flex flex-col flex-grow flex-shrink basis-0'>
-          {/* If the user has a pending due, he can't rent a snowboard so ActualDuration must be hidden */}
-          {due === '0.0' ? <ActualDuration /> : <TotalDuration />}
-           {/* If the user has a pending due, he can't rent a snowboard so RentingPrice must be hidden */}
-          {due === '0.0' && <RentingPrice />}
+          <ActualDuration />
+          <RentingPrice />
           {/* If the user is currently renting a snowboard */}
-          {renter && renter.isRenting && <Button text='Check in' customFunc={handleCheckIn} />}
-          {/* If due greater than 0 */}
-          {due > 0 && <button onClick={makePayment} className='chainboard-default-btn bg-[#f2504b] mb-6 px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'>Pay {due} BNB</button>}
+          { isLoading ? <button className='flex justify-center items-center chainboard-default-btn bg-[#f2504b] px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg'><ButtonLoader /></button> : renter && renter.isRenting && <Button text='Check in' customFunc={handleCheckIn} /> }
         </div>
         <div className='flex flex-grow flex-shrink basis-0'>
           <ProductCarousel />
