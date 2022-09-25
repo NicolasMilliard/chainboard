@@ -17,7 +17,7 @@ const App = () => {
     const { renterExists } = useStateBlockchainContext();
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename='/chainboard'>
         <Navbar />        
         {/* Routes */}
         <Routes>
