@@ -1,7 +1,6 @@
 {
   "name": "chainboard",
   "version": "0.1.0",
-  "homepage": "https://nicolasmilliard.fr/chainboard",
   "private": true,
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
