@@ -124,11 +124,11 @@ contract Chainboard {
     function checkIn(address walletAddress, uint128 snowboardPrice) external isRenter(walletAddress) {
         require(renters[walletAddress].isRenting == true, "You don't have a snowboard.");
 
-        // Set due amount
-        setDue(walletAddress, snowboardPrice);
-
         renters[walletAddress].isRenting = false;
-        renters[walletAddress].end = block.timestamp;        
+        renters[walletAddress].end = block.timestamp; 
+
+        // Set due amount
+        setDue(walletAddress, snowboardPrice);       
     }
 
     /** @notice Get the start of the rental
