@@ -205,4 +205,5 @@ All files        |      100 |    96.15 |      100 |      100 |                |
 -----------------|----------|----------|----------|----------|----------------|
 ```
 
-Details for the coverage can be found at [this link](#).
+Details for the coverage can be found at
+[this link](https://htmlpreview.github.io/?https://github.com/NicolasMilliard/chainboard/blob/main/coverage/index.html).
