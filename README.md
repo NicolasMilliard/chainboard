@@ -1,4 +1,4 @@
-# ⚡️ Chainboard
+# 🏂 Chainboard
 
 ## Table of Contents
 
