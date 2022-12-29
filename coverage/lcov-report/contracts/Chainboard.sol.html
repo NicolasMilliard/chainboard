@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts\Chainboard.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> Chainboard.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>46/46</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.15% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>25/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>17/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>47/47</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">153×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168×</span>
+<span class="cline-any cline-yes">156×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">52×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">24×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: Unlicensed
+pragma solidity 0.8.17;
+&nbsp;
+/**
+ * @title Chainboard
+ * @author Nicolas Milliard
+ * @notice Smart contract for renting snowboards
+ */
+&nbsp;
+contract Chainboard {
+    /// @notice Only owner can receive the payment of the renting of a snowboard
+    address private owner;
+&nbsp;
+    constructor() {
+        owner = msg.sender;
+    }
+&nbsp;
+    /** @dev Renter is initialize by the front end with the current account of the user and following values:
+     * canRent = true, isRenting = false, {due, start, end} = 0, level = 'beginner', size = 142
+     */
+    struct Renter {
+        address walletAddress;
+        bool canRent;
+        bool isRenting;
+        string level;
+        uint8 size;
+        uint128 due;
+        uint256 start;
+        uint256 end;
+    }
+&nbsp;
+    /// @dev Utility mapping to register all renters
+    mapping (address =&gt; Renter) private renters;
+&nbsp;
+    /// @notice Modifier to check if the current account connected to the front end is the same account specify for the transaction
+    modifier isRenter(address walletAddress) {
+        require(msg.sender == walletAddress, "You can only manage your account.");
+        _;
+    }
+&nbsp;
+    /** @notice Create the renter's profile
+     * @dev Require check if renter doesn't have an existing account. If not, add the renter to the mapping
+     * @param walletAddress is the current account of the user
+     * @param canRent is initialize by the frontend at true
+     * @param isRenting is initialize by the frontend at false
+     * @param level is initialize by the frontend at beginner
+     * @param size is initialize by the frontend at 142
+     * @param due is initialize by the frontend at 0
+     * @param start is initialize by the frontend at 0
+     * @param end is initialize by the frontend at 0
+     */
+    function addRenter(address walletAddress, bool canRent, bool isRenting, string calldata level, uint8 size, uint128 due, uint256 start, uint256 end) external {
+        require(renterExists(walletAddress) == false, "You already have an account.");
+        // Key is the walletAddress
+        renters[walletAddress] = Renter(walletAddress, canRent, isRenting, level, size, due, start, end);
+    }
+&nbsp;
+    /** @notice Get renter's values for canRent and isRenting
+     * @dev Check if the sender is a renter with the modifier isRenter
+     * @param walletAddress is the current account of the user
+     * @return canRent (boolean)
+     * @return isRenting (boolean)
+     */
+    function getRenterStatus(address walletAddress) external isRenter(walletAddress) view returns(bool canRent, bool isRenting) {
+        canRent = renters[walletAddress].canRent;
+        isRenting = renters[walletAddress].isRenting;
+    }
+&nbsp;
+    /** @notice Check if a renter exist
+     * @dev A renter exist if his account address is store in the mapping at the key equal to his account address
+     * @param walletAddress is the current account of the user
+     * @return a boolean
+     */
+    function renterExists(address walletAddress) public isRenter(walletAddress) view returns(bool) {
+        // address(0) is the default value for an address
+        if(renters[walletAddress].walletAddress != address(0)) {
+            return true;
+        }
+        return false;
+    }
+&nbsp;
+    /** @notice Check out a snowboard
+     * @dev Only a renter can rent a snowboard. It needs the renter's due is equal to 0 and the renter's canRent to be true
+     * When a renter check out a snowboard, his parameters isRenting, level, size, start and canRent are update
+     * start initialize a counter based and the timestamp of the block of the transaction
+     * @param walletAddress is the current account of the user
+     */
+    function checkOut(address walletAddress, string calldata level, uint8 size) external isRenter(walletAddress) {
+        require(renters[walletAddress].due == 0, "You have a pending payment.");
+        require(renters[walletAddress].canRent == true, "You can't rent at this time.");
+&nbsp;
+        renters[walletAddress].isRenting = true;
+        renters[walletAddress].level = level;
+        renters[walletAddress].size = size;
+        renters[walletAddress].start = block.timestamp;
+        renters[walletAddress].canRent = false;
+    }
+&nbsp;
+    /** @notice Get renter's level
+     * @dev Check if the sender is a renter with the modifier isRenter
+     * @param walletAddress is the current account of the user
+     * @return level (string)
+     */
+    function getLevel(address walletAddress) external isRenter(walletAddress) view returns(string memory level) {
+        level = renters[walletAddress].level;
+    }
+&nbsp;
+    /** @notice Get renter's snowboard size
+     * @dev Check if the sender is a renter with the modifier isRenter
+     * @param walletAddress is the current account of the user
+     * @return size (uint8)
+     */
+    function getSize(address walletAddress) external isRenter(walletAddress) view returns(uint8 size) {
+        size = renters[walletAddress].size;
+    }
+&nbsp;
+    /** @notice Check in a snowboard
+     * @dev Only a renter can rent a snowboard. It needs the renter's isRenting equal to true
+     * When a renter check in a snowboard, his parameters isRenting and end are update
+     * Renter's due is calculate with the function setDue
+     * @param walletAddress is the current account of the user
+     * @param snowboardPrice is the price of the snowboard (in wei) per minute
+     */
+    function checkIn(address walletAddress, uint128 snowboardPrice) external isRenter(walletAddress) {
+        require(renters[walletAddress].isRenting == true, "You don't have a snowboard.");
+&nbsp;
+        renters[walletAddress].isRenting = false;
+        renters[walletAddress].end = block.timestamp; 
+&nbsp;
+        // Set due amount
+        setDue(walletAddress, snowboardPrice);       
+    }
+&nbsp;
+    /** @notice Get the start of the rental
+     * @dev If start is not defined, it returns 0
+     * @param walletAddress is the current account of the user
+     * @return start (uint256)
+     */
+    function getStart(address walletAddress) external isRenter(walletAddress) view returns(uint256 start) {
+        start = renters[walletAddress].start;
+    }
+&nbsp;
+    /** @notice Get the end of the rental
+     * @dev If end is not defined, it returns 0
+     * @param walletAddress is the current account of the user
+     * @return end (uint256)
+     */
+    function getEnd(address walletAddress) external isRenter(walletAddress) view returns(uint256 end) {
+        end = renters[walletAddress].end;
+    }
+&nbsp;
+    /** @notice Set due amount
+     * @dev When the renter checkIn his snowboard, the due is calculate regarding the snowboardPrice
+     * @param walletAddress is the current account of the user
+     * @param snowboardPrice is the price of the snowboard (in wei) per minute
+     */
+    function setDue(address walletAddress, uint128 snowboardPrice) internal {
+        uint timespanMinutes = getTotalDuration(walletAddress);
+        renters[walletAddress].due = uint128(timespanMinutes) * snowboardPrice;
+    }
+&nbsp;
+    /** @notice Get due amount is usefull to display the due in the dApp
+     * @dev Only a renter can rent a snowboard
+     * @param walletAddress is the current account of the user
+     * @return the due of the renter
+     */
+    function getDue(address walletAddress) external isRenter(walletAddress) view returns(uint) {
+        return renters[walletAddress].due;
+    }
+&nbsp;
+    
+    /** @notice Get actual duration of snowboard rent
+     * @dev Only a renter can have an actual duration
+     * Renter must rent a snowboard (isRenting == true)
+     * To get actual duration, block.timestamp is used
+     * @param walletAddress is the current account of the user
+     * @return the actual duration of the renting (in seconds)
+     */
+    function getActualDuration(address walletAddress) external view isRenter(walletAddress) returns(uint) {
+        require(renters[walletAddress].isRenting == true, "You don't have a snowboard.");
+&nbsp;
+        uint durationInSeconds = block.timestamp - renters[walletAddress].start;
+&nbsp;
+        return handleDuration(durationInSeconds);
+    }
+&nbsp;
+    /** @notice Get total duration of snowboard rent
+     * @dev Only a renter can have a total duration
+     * Renter must checkOut then checkIn a snowboard (handle by isRenting)
+     * @param walletAddress is the current account of the user
+     * @return the total duration of the renting (in seconds)
+     */
+    function getTotalDuration(address walletAddress) public view isRenter(walletAddress) returns(uint) {
+        require(renters[walletAddress].isRenting == false, "You are still renting a snowboard.");
+        require(renters[walletAddress].start &gt; 0, "You did not rent a snowboard.");
+        
+        uint durationInSeconds = renters[walletAddress].end - renters[walletAddress].start;
+&nbsp;
+        return handleDuration(durationInSeconds);
+    }
+&nbsp;
+    /** @notice Check if duration is less than one minute, set it to one otherwise convert duration in minutes
+     * @param durationInSeconds is the duration sent by getActualDuration or getTotalDuration
+     * @return the duration in minutes
+     */
+    function handleDuration(uint durationInSeconds) pure internal returns(uint) {
+        if(durationInSeconds &gt;= 60) {
+            // Get duration in minutes
+            uint durationInMinutes = durationInSeconds / 60;
+            return durationInMinutes;
+        } else {
+            return 1;
+        }
+    }
+&nbsp;
+    /** @notice Make the payment and reset renter parameters
+     * @dev Only a renter can have make a payment
+     * A due must to be set greater than 0
+     * The value sent by the renter must be equal to the due (done in the dApp)
+     * @param walletAddress is the current account of the user
+     */
+    function makePayment(address walletAddress) external isRenter(walletAddress) payable {
+        require(renters[walletAddress].due &gt; 0, "You don't have anything due at this time.");
+        require(renters[walletAddress].due == msg.value, "You don't set the correct amount (must be equal to your due).");
+&nbsp;
+        // Transfer amount from renter's account to owner's account
+        (bool success, ) = owner.call{ value : msg.value}("");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(success, "Transfer failed.");
+&nbsp;
+&nbsp;
+        // Payment is made, renter can rent again
+        renters[walletAddress].canRent = true;
+        renters[walletAddress].due = 0;
+        renters[walletAddress].start = 0;
+        renters[walletAddress].end = 0;
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Dec 29 2022 19:52:06 GMT+0100 (heure normale d’Europe centrale)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
