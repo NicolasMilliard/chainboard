@@ -191,9 +191,8 @@ contract Chainboard {
      * @return the total duration of the renting (in seconds)
      */
     function getTotalDuration(address walletAddress) public view isRenter(walletAddress) returns(uint) {
-        require(renters[walletAddress].isRenting == false, "You are still renting a snowboard");
-        require(renters[walletAddress].start > 0, "You are not renting a snowboard");
-        require(renters[walletAddress].end > 0, "You are still renting a snowboard");
+        require(renters[walletAddress].isRenting == false, "You are still renting a snowboard.");
+        require(renters[walletAddress].start > 0, "You did not rent a snowboard.");
         
         uint durationInSeconds = renters[walletAddress].end - renters[walletAddress].start;
 
@@ -222,7 +221,7 @@ contract Chainboard {
      */
     function makePayment(address walletAddress) external isRenter(walletAddress) payable {
         require(renters[walletAddress].due > 0, "You don't have anything due at this time.");
-        require(renters[walletAddress].due == msg.value, "You don't set the correct amount (must be equal to your due)");
+        require(renters[walletAddress].due == msg.value, "You don't set the correct amount (must be equal to your due).");
 
         // Transfer amount from renter's account to owner's account
         (bool success, ) = owner.call{ value : msg.value}("");
