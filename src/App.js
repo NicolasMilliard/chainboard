@@ -1,17 +1,17 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar';
 
-import Home from "./pages/Home";
-import Rent from "./pages/Rent";
-import Renting from "./pages/Renting";
-import Payment from "./pages/Payment";
+import Home from './pages/Home';
+import Rent from './pages/Rent';
+import Renting from './pages/Renting';
+import Payment from './pages/Payment';
 
-import { useStateBlockchainContext } from "./contexts/BlockchainContext";
+import { useStateBlockchainContext } from './contexts/BlockchainContext';
 
-import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const { renterExists } = useStateBlockchainContext();

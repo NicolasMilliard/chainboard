@@ -1,19 +1,18 @@
-import React from "react";
-import { ToastContainer } from "react-toastify";
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
 
-import ConnectWalletButton from "../components/ConnectWalletButton";
-import Button from "../components/Button";
-import ButtonLoader from "../components/ButtonLoader";
-import bsc from "../img/logo/bsc.svg";
+import ConnectWalletButton from '../components/ConnectWalletButton';
+import Button from '../components/Button';
+import ButtonLoader from '../components/ButtonLoader';
+import bsc from '../img/logo/bsc.svg';
 
-import { useStateBlockchainContext } from "../contexts/BlockchainContext";
+import { useStateBlockchainContext } from '../contexts/BlockchainContext';
 
 const Home = () => {
-  const { currentAccount, renterExists, addRenter, isLoading } =
-    useStateBlockchainContext();
+  const { currentAccount, renterExists, addRenter, isLoading } = useStateBlockchainContext();
 
   const handleSubmit = async () => {
-    await addRenter(currentAccount, true, false, "beginner", 142, 0, 0, 0);
+    await addRenter(currentAccount, true, false, 'beginner', 142, 0, 0, 0);
   };
 
   return (
@@ -34,12 +33,10 @@ const Home = () => {
                   thanks to <span className="text-[#f2504b]">Blockchain</span>
                 </h1>
                 <p className="mt-10 max-w-md leading-7">
-                  Rent your snowboard at the real cost thanks to the blockchain
-                  technology.
+                  Rent your snowboard at the real cost thanks to the blockchain technology.
                 </p>
                 <p className="mb-10 max-w-md leading-7">
-                  Connect your wallet, create your profile, choose your
-                  snowboard and you're ready to go!
+                  Connect your wallet, create your profile, choose your snowboard and you're ready to go!
                 </p>
                 <ConnectWalletButton />
               </div>
@@ -48,12 +45,9 @@ const Home = () => {
                 <h1 className="font-extrabold text-2xl sm:text-6xl sm:leading-tight">
                   Congrats! 🎉
                   <br />
-                  Your wallet is{" "}
-                  <span className="text-[#f2504b]">connected</span>!
+                  Your wallet is <span className="text-[#f2504b]">connected</span>!
                 </h1>
-                <p className="my-10 max-w-md leading-7">
-                  Create your profile to access to the snowboards selection.
-                </p>
+                <p className="my-10 max-w-md leading-7">Create your profile to access to the snowboards selection.</p>
                 {isLoading ? (
                   <button className="flex items-center bg-[#f2504b] px-4 py-2 text-white text-14 sm:text-base font-semibold rounded-3xl hover:drop-shadow-lg">
                     <ButtonLoader />
@@ -65,14 +59,8 @@ const Home = () => {
             )}
           </div>
           <div className="mt-10 mb-8">
-            <p className="chainboard-bsc-text uppercase text-[#858585] font-medium ">
-              Powered by
-            </p>
-            <img
-              src={bsc}
-              alt="Binance Smart Chain"
-              className="chainboard-bsc-logo"
-            />
+            <p className="chainboard-bsc-text uppercase text-[#858585] font-medium ">Powered by</p>
+            <img src={bsc} alt="Binance Smart Chain" className="chainboard-bsc-logo" />
           </div>
         </div>
       </div>
