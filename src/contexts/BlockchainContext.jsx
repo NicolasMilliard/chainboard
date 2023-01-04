@@ -21,10 +21,13 @@ export const BlockchainProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Read-only access to the blockchain
-  const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
 
   // Sign messages and transactions on the blockchain
-  const signer = provider.getSigner();
+  const signer = window.ethereum != null ? provider.getSigner() : null;
 
   // Contract (BSC Testnet)
   const contract = new ethers.Contract(contractAddress, abi, signer);
